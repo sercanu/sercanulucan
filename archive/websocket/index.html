@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="personal website, blog, developer, software engineer">
+
+<base href="http://sercanulucan.com/">
+<title>
+
+
+     Tigase, SleekXMPP, ConverseJS, Spark and Pidgin 
+
+</title>
+<link rel="canonical" href="http://sercanulucan.com/archive/websocket/">
+
+
+<script type="text/javascript">
+    var baseURL = 'http:\/\/sercanulucan.com\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+  <link rel="stylesheet" href="http://sercanulucan.com/css/github.css">
+
+
+
+
+
+<link rel="stylesheet" href="http://sercanulucan.com/css/reset.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/pygments.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/main.css">
+
+
+    <link rel="stylesheet" href="http://sercanulucan.com/css/override.css">
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="http://sercanulucan.com/img/favicon.ico"
+
+>
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            <a href="http://sercanulucan.com/"><div class="name">Sercan Ulucan</div></a>
+            <nav>
+                <ul>
+                    <a href="http://sercanulucan.com/blog/"><li>Blog</li></a>
+                    <a href="http://sercanulucan.com/clojure/"><li>Clojure</li></a>
+                    <a href="http://sercanulucan.com/misc/"><li>Misc.</li></a>
+                    <a href="http://sercanulucan.com/archive/"><li>Archive</li></a>
+                    <a href="http://sercanulucan.com/about/"><li>About</li></a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Tigase, SleekXMPP, ConverseJS, Spark and Pidgin
+
+</div>
+
+                    <div class="initials"><a href="http://sercanulucan.com/">ad</a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Thu Sep 12 2013 11:24:04 FET">Sep 12, 2013</div>
+                    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>I followed steps below to have a running XMPP server.</p>
+
+<ol>
+<li>Tigase XMPP server installation (check the gist below)</li>
+<li>Connecting with Spark and Pidgin</li>
+<li>SleekXMPP client example (check the gist below)</li>
+<li>ConverseJS example (check the gist below)</li>
+</ol>
+
+<h3 id="tigase">Tigase</h3>
+
+<p><a href="http://www.tigase.org/" target="_blank">Tigase</a> is a GPL licenced XMPP server which is scalable and performs well. There is 2 more popular XMPP servers <a href="https://www.ejabberd.im/" target="_blank">ejabberd</a> and <a href="http://www.igniterealtime.org/projects/openfire/index.jsp" target="_blank">Openfire</a> which can be good choices. Openfire is Apache Licenced as well but it is for middle size projects.
+I wanted to try Tigase, it seems well and easy to setup.</p>
+
+<h3 id="spark-and-pidgin">Spark and Pidgin</h3>
+
+<p>If you want to connect to XMPP server, you need a client. It is possible to use <a href="http://www.igniterealtime.org/projects/spark/index.jsp" target="_blank">Spark</a> for Windows and <a href="http://www.pidgin.im/" target="_blank">Pidgin</a> for Ubuntu. Also they have versions for popular operating systems.</p>
+
+<p><em>Clients should be able to resolve XMPP server hostname. This can be done via adding the server to hosts file. Otherwise it is not possible to connect. Add to hosts file myhostname xmppserverip record.</em></p>
+
+<h3 id="sleekxmpp">SleekXMPP</h3>
+
+<p>This is XMPP client python library. There are some other libraries but this is the way to go. Check <a href="http://sleekxmpp.com/" target="_blank">SleekXMPP.com</a> and the gist below.</p>
+
+<h3 id="conversejs">ConverseJS</h3>
+
+<p><a href="https://conversejs.org/" target="_blank">ConverseJS</a> is XMPP Client for browsers. It is built on Strophe.js which is the most popular Bosh client. Check ConverseJS.org and the gist below.</p>
+
+<h3 id="bosh-vs-websockets">Bosh vs Websockets</h3>
+
+<p>Still there is no completed standart for websockets, XMPP servers started to support websockets. Tigase supports as well. But there is a few and early stage clients which supports websocket. There is <a href="http://mrjoes.github.io/2012/10/11/sockjs-ejabberd.html" target="_blank">good post</a> from Mr. Joes.</p>
+
+<script src="//gist.github.com/sercanu/6959854.js"></script>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="http://sercanulucan.com/js/highlight.pack.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+

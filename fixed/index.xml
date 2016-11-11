@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fixed-rss on Sercan Ulucan</title>
+    <link>http://sercanulucan.com/fixed/index.xml</link>
+    <description>Recent content in Fixed-rss on Sercan Ulucan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Mon, 31 Oct 2016 12:43:56 +0300</lastBuildDate>
+    <atom:link href="http://sercanulucan.com/fixed/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About</title>
+      <link>http://sercanulucan.com/about/</link>
+      <pubDate>Mon, 31 Oct 2016 12:43:56 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/about/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://sercanulucan.com/img/photo.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Hi, I&amp;rsquo;m Sercan Ulucan from Istanbul. Welcome to my personal website. I&amp;rsquo;m a software engineer and nowadays, I&amp;rsquo;m focused on backend systems and functional programming. I&amp;rsquo;m planning to share my notes and other stuff at this website.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;mailto:sercanulucan@gmail.com&#34;&gt;&lt;i class=&#34;icon ion-ios-email&#34;&gt;&lt;/i&gt;  sercanulucan@gmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/sercanu&#34; target=&#34;_blank&#34;&gt;&lt;i class=&#34;icon ion-social-github&#34;&gt;&lt;/i&gt;  Github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://twitter.com/SercanUlucan&#34; target=&#34;_blank&#34;&gt;&lt;i class=&#34;icon ion-social-twitter&#34;&gt;&lt;/i&gt;  Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.goodreads.com/user/show/59245019-sercan&#34; target=&#34;_blank&#34;&gt;&lt;i class=&#34;icon ion-bookmark&#34;&gt;&lt;/i&gt;   Goodreads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.flickr.com/photos/134530188@N05/&#34; target=&#34;_blank&#34;&gt;&lt;i class=&#34;icon ion-camera&#34;&gt;&lt;/i&gt;  Flickr&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.postcrossing.com/user/sercanu&#34; target=&#34;_blank&#34;&gt;&lt;i class=&#34;icon ion-paper-airplane&#34;&gt;&lt;/i&gt;  Postcrossing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/index.xml&#34;&gt; &lt;i class=&#34;icon ion-social-rss larger&#34;&gt;&lt;/i&gt;  RSS&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

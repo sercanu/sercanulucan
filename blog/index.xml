@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog-rss on Sercan Ulucan</title>
+    <link>http://sercanulucan.com/blog/index.xml</link>
+    <description>Recent content in Blog-rss on Sercan Ulucan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Fri, 11 Nov 2016 11:24:04 +0300</lastBuildDate>
+    <atom:link href="http://sercanulucan.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Another Attempt at Blogging</title>
+      <link>http://sercanulucan.com/blog/2016/11/another-attempt-at-blogging/</link>
+      <pubDate>Fri, 11 Nov 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2016/11/another-attempt-at-blogging/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;http://sercanulucan.com/images/20161111_blogging_attempt.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t know how many times I attempted to write regularly. I hope this one becomes the last one :) I strongly wish to produce something every day and I want to write down what I&amp;rsquo;ve experienced. By the way, I can develop a habit and improve my writing skill which is an important one to express myself. English isn&amp;rsquo;t my native language and I sometimes struggle with making good sentences. I&amp;rsquo;d like overcome this issue and obtain an attractive writing skill, which is not an easy goal even for natives. So, writing regularly is the only way and I want to keep my promise to be successful.&lt;/p&gt;
+
+&lt;h3 id=&#34;history-of-my-attempts&#34;&gt;History of My Attempts&lt;/h3&gt;
+
+&lt;p&gt;I&amp;rsquo;m still not sure if I have found the right way to organize my future writings. Huh looks stupid, but finding the best blogging way is similar to picking the right web framework for your project. I feel the same stress and look for the perfect solution which has never existed :) This reminds me the funny motto of &lt;a href=&#34;https://grails.org/&#34; target=&#34;_blank&#34;&gt;Grails&lt;/a&gt;, &lt;strong&gt;The search is over.&lt;/strong&gt; However, the search never ends and we still keep looking for a more beautiful template, better JS framework, faster and cheaper hosting etc. Obsessive? I think yes!&lt;/p&gt;
+
+&lt;h3 id=&#34;the-first-attempt-geocities-2001&#34;&gt;The First Attempt, Geocities - 2001&lt;/h3&gt;
+
+&lt;p&gt;I was at high school and this was the time when I met html tags. It was a good opportunity to host a free website, although 15 MB space was pretty limited :) Geocities will always remain in my memories where I experienced the power of internet. But I wasn&amp;rsquo;t aware of it :)&lt;/p&gt;
+
+&lt;h3 id=&#34;frontpage-and-flash-2003&#34;&gt;Frontpage and Flash - 2003&lt;/h3&gt;
+
+&lt;p&gt;After playing with html tags for a few years, I decided to build a website using Frontpage and Flash. It was the easiest way to create something attractive. However, my content was irrelevant and animated gifs were really terrible :) I didn&amp;rsquo;t continue to write and removed all the site from the FTP servers at my university :)&lt;/p&gt;
+
+&lt;h3 id=&#34;blogger-2007&#34;&gt;Blogger - 2007&lt;/h3&gt;
+
+&lt;p&gt;I always wanted to share the things I find useful or interesting. This is something like to show an interesting stone to your friends when you&amp;rsquo;re a child :) Blogger was getting popular and it took my attention until having a Facebook account. I ended my &amp;ldquo;serious&amp;rdquo; blogging attempt after starting to share posts on there :)&lt;/p&gt;
+
+&lt;h3 id=&#34;wordpress-hosting-2010&#34;&gt;Wordpress Hosting - 2010&lt;/h3&gt;
+
+&lt;p&gt;Wordpress was very popular, Blogger was its rival. Also there were other PHP frameworks too, but Wordpress was the most promising one. Search engines love Wordpress, there were tones of plug-ins and themes. It was very customizable. So, I decided to buy a hosting for my blog. The firm claimed that they&amp;rsquo;re doing a great job, but after enabling the most popular plug-ins, I understand that they&amp;rsquo;re totally a mess. I ended up struggling with the file permissions, database problems and many more issues. At the end, I started to upload my html files to their FTP servers, stopped using Wordpress and this was a very good reason to end my blogging attempt :)&lt;/p&gt;
+
+&lt;h3 id=&#34;wordpress-on-heroku-2013&#34;&gt;Wordpress on Heroku - 2013&lt;/h3&gt;
+
+&lt;p&gt;This time I was sure that I found a totally free, tested, solid solution for blogging. There were static site generators too, like Jekyll and Pelican, but Wordpress was still more charming for me. I initialized three different blogs in different languages, English, Turkish and Spanish. I posted &lt;a href=&#34;http://sercanulucan.com/archive/setting-up-wordpress/&#34;&gt;how to build a website&lt;/a&gt; and &lt;a href=&#34;http://sercanulucan.com/archive/keeping-heroku-dynos-alive/&#34;&gt;trigger the Heroku dynos&lt;/a&gt; to keep them alive :) Otherwise, it was taking 6-7 seconds to wake up them at the first GET request. Everything was okay until it became a burden to write something to three blogs. Also I started working at new company and I didn&amp;rsquo;t have much free time. Anyway, you see how I am disciplined :)&lt;/p&gt;
+
+&lt;h3 id=&#34;static-site-generators-and-gitbook-2015&#34;&gt;Static Site Generators and Gitbook - 2015&lt;/h3&gt;
+
+&lt;p&gt;The Wordpress on Heroku has some limitations (10 MB Postgres limit) if you&amp;rsquo;d like to host it completely free. However, Github pages serve 1 GB content for free. Markdown is an easy way to write your posts. If your website doesn&amp;rsquo;t need any database, like most of the blogs, static site generators are great choice. You just render the html files and push them to Github repository. I thought Jekyll or Pelican will be too complex for my needs, and I was looking for Clojure projects. I ended up my search picking &lt;a href=&#34;http://cryogenweb.org/&#34; target=&#34;_blank&#34;&gt;Cryogen&lt;/a&gt; as my static site generator. It was okay, but than I came across with Gitbook. The idea of editing markdown files online was cool. It looked easier than a static site generator and I moved my site to Gitbook. After a few posts, I give up again. It was for writing books, not for blogs. It has some limitations like organizing the menu etc.&lt;/p&gt;
+
+&lt;h3 id=&#34;final-one-hugo-2016&#34;&gt;Final one, Hugo - 2016&lt;/h3&gt;
+
+&lt;p&gt;It&amp;rsquo;s hard to compare static site generators from all aspects here. So, I&amp;rsquo;ll just tell the primary reasons. I picked Hugo because it doesn&amp;rsquo;t have dependencies, runs the website very fast and it&amp;rsquo;s possible to observe changes without saving the MD file and refreshing the page. It&amp;rsquo;s convention is easy to learn. Templates, shortcodes and many other features are useful. You don&amp;rsquo;t easily get stucked. I hope it&amp;rsquo;ll be my last toy :)&lt;/p&gt;
+
+&lt;h3 id=&#34;next&#34;&gt;Next?&lt;/h3&gt;
+
+&lt;p&gt;I&amp;rsquo;m thinking about to share my posts at Medium. Of course if I write something worth to share :)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

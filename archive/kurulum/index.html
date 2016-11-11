@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="personal website, blog, developer, software engineer">
+
+<base href="http://sercanulucan.com/">
+<title>
+
+
+     Yazılım Geliştiriciler İçin Ubuntu Kurulumu (Turkish) 
+
+</title>
+<link rel="canonical" href="http://sercanulucan.com/archive/kurulum/">
+
+
+<script type="text/javascript">
+    var baseURL = 'http:\/\/sercanulucan.com\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+  <link rel="stylesheet" href="http://sercanulucan.com/css/github.css">
+
+
+
+
+
+<link rel="stylesheet" href="http://sercanulucan.com/css/reset.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/pygments.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/main.css">
+
+
+    <link rel="stylesheet" href="http://sercanulucan.com/css/override.css">
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="http://sercanulucan.com/img/favicon.ico"
+
+>
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            <a href="http://sercanulucan.com/"><div class="name">Sercan Ulucan</div></a>
+            <nav>
+                <ul>
+                    <a href="http://sercanulucan.com/blog/"><li>Blog</li></a>
+                    <a href="http://sercanulucan.com/clojure/"><li>Clojure</li></a>
+                    <a href="http://sercanulucan.com/misc/"><li>Misc.</li></a>
+                    <a href="http://sercanulucan.com/archive/"><li>Archive</li></a>
+                    <a href="http://sercanulucan.com/about/"><li>About</li></a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Yazılım Geliştiriciler İçin Ubuntu Kurulumu (Turkish)
+
+</div>
+
+                    <div class="initials"><a href="http://sercanulucan.com/">ad</a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Fri Sep 20 2013 11:24:04 FET">Sep 20, 2013</div>
+                    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>Uygulama geliştirmek için ihtiyaca göre ya da alışkanlıklara göre farklı ortamlar kullanmak mümkün. Bana en uygun gelen işletim sistemi Ubuntu oldu. Mac OS ile beraber geliştiriciler arasında en popüler olduğunu söylemek mümkün.</p>
+
+<h3 id="sanal-makine-kurulumu">Sanal Makine Kurulumu</h3>
+
+<p>En kolay yöntem sanal makine olarak kurmak. Bir kaç adımda Ubuntu çalışır hale geliyor.</p>
+
+<ol>
+<li>Ubuntu’yu 64-bit seçerek ISO olarak indirin.</li>
+<li>VMPlayer ya da VirtualBox kurun.</li>
+<li>Yeni sanal makine oluşturup, indirdiğiniz ISO’yu göstererek kurulum yapın. 20-30 GB disk, 2-3 GB ram yeterli olur. Kurulum sırasında saat dilimi, klavye düzeni, kullanıcı şifresi gibi birkaç bilgi dışında bilgi gerekmiyor.</li>
+</ol>
+
+<p>Böylece her yere taşınabilen, gerekirse kolayca silinebilen bir işletim sistemine sahip olduk. Eğer bilgisayarınızın belleği müsaitse aynı anda birden çok sanal makineyle çalışmak mümkün. Deneme ya da demo amaçlı yapacağınız kurulumları yeni sanal makinede yapabilirsiniz.</p>
+
+<p>Aşağıdaki uygulamaları kurmaya ihtiyacınız olacaktır.</p>
+
+<ul>
+<li>Java</li>
+<li>Ortam Değişkenleri</li>
+<li>Maven</li>
+<li>Git</li>
+<li>Mercurial</li>
+<li>Python Araçları</li>
+<li>Guake</li>
+<li>IDEA</li>
+<li>PyCharm</li>
+<li>Sublime Text</li>
+</ul>
+
+<h3 id="java-kurulumu">Java Kurulumu</h3>
+
+<p>İstediğiniz Java sürümünü indirin. Aşağıdaki şekilde kurabilirsiniz.</p>
+
+<pre><code class="language-bash">$ ./jdk-6u45-linux-x64.bin
+$ sudo mkdir /usr/lib/jvm
+$ sudo mv jdk1.6.0_45 /usr/lib/jvm
+$ sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk1.6.0_45/bin/javac 1
+$ sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.6.0_45/bin/java 1
+$ sudo update-alternatives --install /usr/bin/javaws javaws /usr/lib/jvm/jdk1.6.0_45/bin/javaws 1
+$ sudo update-alternatives --config javac
+$ sudo update-alternatives --config java
+$ sudo update-alternatives --config javaws
+$ java -version
+</code></pre>
+
+<h3 id="ortam-değişkenleri">Ortam Değişkenleri</h3>
+
+<p>Ortam değişkenlerini bir dosya aracılığı ile belirmek faydalı olacaktır.</p>
+
+<pre><code class="language-bash">$ cd ~
+$ nano .bashrc
+# ile .bashrc'nin başına aşağıdakini yapıştıralım.
+
+if [ -f ~/env_options ]; then
+   . ~/env_options
+fi
+</code></pre>
+
+<p>Örnek env_options dosyası</p>
+
+<pre><code class="language-bash">JAVA_HOME=/usr/lib/jvm/jdk1.6.0_45
+M2_HOME=/home/user/devtool/maven3
+MAVEN_OPTS=&quot;-Xms256m -Xmx512m -XX:PermSize=256m -XX:MaxPermSize=256m&quot;
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$M2_HOME/bin
+export MAVEN_OPTS
+export JAVA_HOME
+export M2_HOME
+export PATH
+export WORKON_HOME=~/.envs
+source /usr/local/bin/virtualenvwrapper.sh
+</code></pre>
+
+<h3 id="git-kurulumu">Git Kurulumu</h3>
+
+<p>İndirdikten sonra aşağıdaki komutlarla kurabilirsiniz. $ sudo apt-get install git ile repository’den de kurulabilir.</p>
+
+<pre><code class="language-bash">$ tar -xzvf gitxxx.tar.gz
+$ cd gitxxx
+$ make prefix=/usr/local all
+$ sudo make prefix=/usr/local install
+$ which git
+$ git --version
+</code></pre>
+
+<h3 id="diğer-kurulumlar">Diğer Kurulumlar</h3>
+
+<p>Maven, Sublime Text gibi uygulamalar binary olarak indirilip çalıştırılabilir.</p>
+
+<pre><code class="language-bash"># Python araçları
+$ sudo apt-get install python-pip python-dev build-essential
+$ sudo apt-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev
+$ sudo apt-get install python-virtualenv
+$ sudo pip install virtualenvwrapper
+
+# Ssh Server
+$ sudo apt-get install openssh-server
+
+$ sudo apt-get install mercurial
+$ sudo apt-get install postgresql-9.1 libpq-dev
+</code></pre>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="http://sercanulucan.com/js/highlight.pack.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+

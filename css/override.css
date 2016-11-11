@@ -1,0 +1,6 @@
+/* override css styles of the main theme here */
+
+cite{
+font-size: 80%;
+font-style: italic;
+}

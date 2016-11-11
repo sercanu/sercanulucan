@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="personal website, blog, developer, software engineer">
+
+<base href="http://sercanulucan.com/">
+<title>
+
+
+     Unicode, UTF-8 ve Python (Turkish) 
+
+</title>
+<link rel="canonical" href="http://sercanulucan.com/archive/unicode-utf8/">
+
+
+<script type="text/javascript">
+    var baseURL = 'http:\/\/sercanulucan.com\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+  <link rel="stylesheet" href="http://sercanulucan.com/css/github.css">
+
+
+
+
+
+<link rel="stylesheet" href="http://sercanulucan.com/css/reset.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/pygments.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/main.css">
+
+
+    <link rel="stylesheet" href="http://sercanulucan.com/css/override.css">
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="http://sercanulucan.com/img/favicon.ico"
+
+>
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            <a href="http://sercanulucan.com/"><div class="name">Sercan Ulucan</div></a>
+            <nav>
+                <ul>
+                    <a href="http://sercanulucan.com/blog/"><li>Blog</li></a>
+                    <a href="http://sercanulucan.com/clojure/"><li>Clojure</li></a>
+                    <a href="http://sercanulucan.com/misc/"><li>Misc.</li></a>
+                    <a href="http://sercanulucan.com/archive/"><li>Archive</li></a>
+                    <a href="http://sercanulucan.com/about/"><li>About</li></a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Unicode, UTF-8 ve Python (Turkish)
+
+</div>
+
+                    <div class="initials"><a href="http://sercanulucan.com/">ad</a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Tue Sep 10 2013 11:24:04 FET">Sep 10, 2013</div>
+                    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>Genelde kodlama(encoding) sorunuyla karşılaşıldığında akla gelen bir konu bu. Halbuki detayları öğrenildiğinde bitmeyen sinir bozucu hatalardan kurtulmak mümkün.</p>
+
+<h3 id="neden-ihtiyaç-duyuyoruz">Neden ihtiyaç duyuyoruz?</h3>
+
+<p>Bilgisayarlar için herşey bayttan meydana gelir. Dosyadaki bilgiler, ağdan geçen veriler hep bayt cinsinden saklanır. Baytlar onları geri çözümleyene kadar anlamsızdırlar. İlk bilgisayarlar ortaya çıktığında ASCII karakter seti belirlendi. Her karakter için 1 byte kullanmak yeterliydi. Bu şekilde en fazla 256 karakter elde etmek mümkündü. Her karakterin 1 sayı karşılığı olduğunu düşünürsek 2^8 = 256.</p>
+
+<p>Bu kadar az karakter çeşidi elbette tüm diller için yetersizdi. Hatta latin dilleri için bile yetersizdi. Zamanla farklı karakter setleri ortaya çıktı ama durumu daha karışık hale getirdi. Bu yüzden Unicode adında genel geçer ve tüm dilleri kapsayan bir karakteri seti ortaya çıktı. Doğal olarak 1 karakter 1 bayt ile ifade edilemiyor, 4 bayta kadar ifade edilen karakterler var.</p>
+
+<h3 id="unicode-nedir">Unicode Nedir?</h3>
+
+<p>Unicode şu an 110 bin karakteri içeren bir karakter setidir. Orhun Kitabeleri’nin yazıldığı eski Türkçe alfabesi bile mevcuttur.
+U+00CA ya da \u00CA şeklinde u’dan sonra 16′lık sayı birimiyle gösterilirler.</p>
+
+<p>Türkçe karakterlerin Unicode karşılıkları şunlardır:</p>
+
+<pre><code>ğ – \u011f
+Ğ – \u011e
+ı – \u0131
+İ – \u0130
+ö – \u00f6
+Ö – \u00d6
+ü – \u00fc
+Ü – \u00dc
+ş – \u015f
+Ş – \u015e
+ç – \u00e7
+Ç – \u00c7
+</code></pre>
+
+<p>Görüldüğü gibi ö, ü, ç 1 bayt ile ifade edilebiliyor. Bunun sebebi Unicode setinin ilk 128 karakteri ASCII ile, ilk 256 karakteri ISO-8859-9 (Latin-1) ile aynı tutulmuştur. Bu karakterler ISO-8859-9′da olduğu için sıraları daha öndedir. Bu yüzdendir ki bazı yazılarda ö, ü, ç harfleri düzgün çıkar ama diğer Türkçe karakterler bozuk çıkar.</p>
+
+<h3 id="utf-8-nedir">UTF-8 Nedir?</h3>
+
+<p>UTF-8 bir kodlama yöntemidir. UTF Unicode Transformation Format’ın kısaltılmış halidir. Veriler dosyaya yazılacağı ya da ağ üzerinden geçeceği zaman baytlara çevrilmek zorundadır. Bu çevrilme işlemine kodlama denir. Unicode karakterlerin kodlanmasında en yaygın kullanılan yöntem UTF-8′dir.
+UTF-8 en Unicode karakter setini en verimli yani en az bayt kaplayacak kadar kodlamaya çalışır.</p>
+
+<p>Örneğin
+U+015E Unicode karakteri olan Ş’nin UTF-8 karşılığı 0xc59e olarak gösterilir.</p>
+
+<p>Python 2.X’te Unicode
+Python’da metinler 2 şekilde tutulur. Unicode ya da bayt serisi şeklinde. Unicode olduğunu belirtmek için metinin başına “u” koyulur. Bayt serisi olan verinin başına “b” konulabilir fakat opsiyoneldir.</p>
+
+<p>Örneğin</p>
+
+<pre><code class="language-python">veri = 'Merhaba'
+print(type(veri))
+&lt;type 'str'&gt;
+
+veri = u'Merhaba'
+print(type(veri))
+&lt;type 'unicode'&gt;
+</code></pre>
+
+<p>Görüldüğü gibi Unicode ve Bayt serileri farklı tipte nesnelerdir.
+Python’da eğer farklı bir değer verilmediyse, bayt serileri varsayılan olarak ASCII’ye çevrilmeye çalışır. Eğer ASCII’ye çevrilemiyorsa hata alınır.</p>
+
+<p>Örneğin</p>
+
+<pre><code class="language-python">veri = 'Merhaba Dünya'
+print(veri)
+File &quot;/home/user/PycharmProjects/practice/practice2.py&quot;, line 3
+SyntaxError: Non-ASCII character '\xc3' in file /home/user/PycharmProjects/practice/practice2.py on line 3, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details
+
+Unicode'a çevirelim:
+
+veri = u'Merhaba Dünya'
+print(veri)
+File &quot;/home/user/PycharmProjects/practice/practice2.py&quot;, line 3
+SyntaxError: Non-ASCII character '\xc3' in file /home/user/PycharmProjects/practice/practice2.py on line 3, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details
+</code></pre>
+
+<p>Yine hata aldık! Bunun sebebi ” arasına yazdığımız ifadenin ASCII’den Unicode’a çevrilmeye çalışılmasıdır. Bu yüzden ASCII karşılığı olmayan bir karakter çevrilemez.</p>
+
+<p>Doğrusu:</p>
+
+<pre><code class="language-python">veri = 'Merhaba D\u00fcnya'
+print(veri)
+Merhaba D\u00fcnya
+
+veri = u'Merhaba D\u00fcnya'
+print(veri)
+Merhaba Dünya
+</code></pre>
+
+<p>Aynı kodu dosyaya yazmak için kullanalım:</p>
+
+<pre><code class="language-python">veri = u'Merhaba D\u00fcnya'
+f = open('/home/user/practice2.txt', 'w')
+f.write(veri)
+f.close()
+
+Traceback (most recent call last):
+  File &quot;/home/user/PycharmProjects/practice/practice2.py&quot;, line 8, in
+    f.write(veri)
+UnicodeEncodeError: 'ascii' codec can't encode character u'\xfc' in position 9: ordinal not in range(128)
+</code></pre>
+
+<p>Yine ne oldu? Hani Unicode yapmıştık?
+Eğer Python kullanılan terminalin kodlamasını tanıyabilirse sys.stdout.encoding parametresini bu kodlama değeri yapar. Büyük ihtimal terminalizin kodlaması UTF-8′di ve yukarıdaki kodlar bu yüzden çalıştı. Dosyaya yazarken herhangi bir kodlama belirtmediğimiz için ve sys.getdefaultencoding() ASCII olduğu için hata alındı.</p>
+
+<p>Girdilerde çözümleme(decoding), çıktılarda kodlama(encoding) yaparak sürekli Unicode değerlerle çalışmamız en iyisi olacaktır.</p>
+
+<p>Aşağıdaki kod hatasız çalışacaktır.</p>
+
+<pre><code class="language-python">veri = u'Merhaba D\u00fcnya'
+veri = veri.encode('utf-8')
+f = open('/home/user/practice2.txt', 'w')
+f.write(veri)
+f.close()
+</code></pre>
+
+<p>Kodlama değerlerinin okunması ve ayarlanması:</p>
+
+<pre><code class="language-python">print(sys.getdefaultencoding())
+print(sys.stdout.encoding)
+ascii
+UTF-8
+</code></pre>
+
+<p>kodlama bilgileri bu şekilde okunabilir.</p>
+
+<pre><code class="language-python">import os, sys
+if sys.stdout.encoding == None:
+    os.putenv(&quot;PYTHONIOENCODING&quot;,'UTF-8')
+    os.execv(sys.executable,['python']+sys.argv)
+</code></pre>
+
+<p>gerekirse PYTHONIOENCODING parametresi UTF-8 yapılabilir.
+Unicode ve ASCII metin işlemleri:</p>
+
+<pre><code class="language-python">veri = 'Merhaba ' + u'D\u00fcnya'
+print(type(veri))
+&lt;type 'unicode'&gt;
+</code></pre>
+
+<p>Python 2.X Unicode ile ASCII birleştirildiğinde bunu Unicode’a çevirir. (Python 3.X bu durumda hata verir.)</p>
+
+<h3 id="python-3-x-te-unicode">Python 3.X’te Unicode</h3>
+
+<p>Python 3.X’te str tipi zaten veriyi Unicode olarak saklar. Unicode’a çevirmek için “u” eklenmesi gerekmez. Aksine bayt olan verinin başına b”&rdquo; eklemek gerekir.
+Ayrıca sys.getdefaultencoding() değeri ASCII yerine UTF-8‘dir.
+Python 3.X “Mer” + b”haba” gibi Unicode ve bayt değerin işleme sokulmasına izin vermez.</p>
+
+<h3 id="öneriler">Öneriler</h3>
+
+<p>Bir girdi söz konusu ise mutlaka çözümleme(decode) yapılarak Unicode’a çevrilmelidir.
+Bir çıktı söz konusu ise mutlaka kodlama(encode) yapılarak UTF-8′e (ya da istediğinize) çevrilmelidir.
+Kodda sadece Unicode değerler işleme sokulmalıdır.
+Eldeki değerin tipine bakılarak gerekirse Unicode’a dönüştürülmelidir.
+Uygulama farklı karakter setleriyle test edilmelidir.</p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="http://sercanulucan.com/js/highlight.pack.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+
