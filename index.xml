@@ -6,8 +6,45 @@
     <description>Recent content on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 13 Nov 2016 11:24:04 +0300</lastBuildDate>
+    <lastBuildDate>Mon, 14 Nov 2016 11:24:04 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Postcrossing</title>
+      <link>http://sercanulucan.com/blog/2016/11/postcrossing/</link>
+      <pubDate>Mon, 14 Nov 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2016/11/postcrossing/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;http://sercanulucan.com/images/20161114_postcrossing.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;em&gt;Nipponia Nippons, &lt;a href=&#34;https://en.wikipedia.org/wiki/Crested_ibis&#34; target=&#34;_blank&#34;&gt;Japanese Crested ibis&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;what-is-postcrossing&#34;&gt;What is Postcrossing?&lt;/h3&gt;
+
+&lt;p&gt;It&amp;rsquo;s a website that enables sending postcards to random people and receive from as well. Here, I would like to share my experiences about &lt;a href=&#34;https://www.postcrossing.com/&#34; target=&#34;_blank&#34;&gt;postcrossing&lt;/a&gt;. I hope you find it engaging.&lt;/p&gt;
+
+&lt;h4 id=&#34;how-it-works&#34;&gt;How it works?&lt;/h4&gt;
+
+&lt;p&gt;Sender confirms to send a postcard and takes an ID from the website. Every postcard has an unique ID and it should be written on the postcard by the sender. When the postcard arrives, the receiver submits the ID and the postcard gets registered. So, the sender gains right to receive a postcard from a random sender. Also it&amp;rsquo;s possible to swap postcards directly. If you think a member has cool postcards, you can ask for swapping. This time there is no need to have an ID or registering.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve sent and received 54 postcards until now. It was very exciting to check your postbox when you arrive home. Also, it&amp;rsquo;s very exciting to get the notification email with a warm thank you message from the receiver. These are enough reasons to be a member of the website, however, there are more reasons like below :)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You master the world map better than anyone else.&lt;/li&gt;
+&lt;li&gt;You have opportunity to make friends from all over the world.&lt;/li&gt;
+&lt;li&gt;Community is very nice, they&amp;rsquo;re all kind people.&lt;/li&gt;
+&lt;li&gt;Postcards are informative, you learn a lot.&lt;/li&gt;
+&lt;li&gt;You dust off your handwriting skill.&lt;/li&gt;
+&lt;li&gt;It&amp;rsquo;s fun to receive something physically.&lt;/li&gt;
+&lt;li&gt;Rare but some people sends an envelope with full of surprises :) Coasters, teabags, stickers&amp;hellip;&lt;/li&gt;
+&lt;li&gt;You share nice ideas, kind wishes or interesting stories.&lt;/li&gt;
+&lt;li&gt;Stamps are cool.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;m sure it&amp;rsquo;s possible to say more. The cost of this joy is about 1$ or 1€ post fee, plus the cost of the postcard. Don&amp;rsquo;t underestimate these costs :) You can find yourself investing a lot to this hobby :)&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Wearing Grey</title>
@@ -149,7 +186,7 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;14 November 2016&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;4-0-0-0-0-0-0&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
@@ -157,7 +194,7 @@
 
 &lt;tr&gt;
 &lt;td&gt;21 November 2016&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;0-0-0-0-0-0-0&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
@@ -165,7 +202,7 @@
 
 &lt;tr&gt;
 &lt;td&gt;28 November 2016&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;0-0-0-0-0-0-0&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
@@ -489,7 +526,18 @@ navigation with a submarine, aviation with both military and civil planes, machi
       <pubDate>Fri, 01 Jan 2016 11:24:04 +0300</pubDate>
       
       <guid>http://sercanulucan.com/clojure</guid>
-      <description>&lt;p&gt;Still under construction.&lt;/p&gt;
+      <description>&lt;p&gt;Still under construction.
+- Data Structures
+- Namespaces
+- Spec
+- Destructuring
+- Macros
+- Protocols
+- Multimethods
+- interop
+- special forms
+- laziness
+- concurrency&lt;/p&gt;
 </description>
     </item>
     
@@ -683,16 +731,6 @@ C-h f previous-line describe a function&lt;/p&gt;
 &lt;script src=&#34;//gist.github.com/sercanu/6868868.js&#34;&gt;&lt;/script&gt;
 
 &lt;script src=&#34;//gist.github.com/sercanu/6874474.js&#34;&gt;&lt;/script&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jenkins Installation and Sample Python Project</title>
-      <link>http://sercanulucan.com/archive/jenkins/</link>
-      <pubDate>Tue, 01 Oct 2013 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/archive/jenkins/</guid>
-      <description>&lt;script src=&#34;//gist.github.com/sercanu/6881596.js&#34;&gt;&lt;/script&gt;
 </description>
     </item>
     

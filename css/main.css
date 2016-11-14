@@ -589,20 +589,20 @@ section.main .content .markdown h2 {
   margin-bottom: 1.5rem;
 }
 section.main .content .markdown h3 {
-  font-size: 1.1em;
-  margin-bottom: 1.1rem;
+  font-size: 1.15em;
+  margin-bottom: 1.15rem;
 }
 section.main .content .markdown h4{
-  font-size: 1.0rem;
-  margin-bottom: 1.0rem;
+  font-size: 1.05rem;
+  margin-bottom: 1.05rem;
   letter-spacing: none;
   text-transform: none;
 }
 
 section.main .content .markdown h5,
 section.main .content .markdown h6 {
-  font-size: 0.9rem;
-  margin-bottom: 0.9rem;
+  font-size: 1.0rem;
+  margin-bottom: 1.0rem;
   letter-spacing: none;
   text-transform: none;
 }
@@ -662,10 +662,17 @@ section.main .content .markdown dd {
 section.main .content .markdown ul {
   margin-bottom: 1.25rem;
 }
-section.main .content .markdown li {
+section.main .content .markdown ol li {
+  list-style-type: decimal;
+  list-style-position: inside;
+
+}
+
+section.main .content .markdown ul li {
   list-style-type: disc;
   list-style-position: inside;
 }
+
 section.main .content .markdown em {
   font-style: italic;
 }

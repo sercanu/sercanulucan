@@ -15,7 +15,18 @@
       <pubDate>Fri, 01 Jan 2016 11:24:04 +0300</pubDate>
       
       <guid>http://sercanulucan.com/clojure</guid>
-      <description>&lt;p&gt;Still under construction.&lt;/p&gt;
+      <description>&lt;p&gt;Still under construction.
+- Data Structures
+- Namespaces
+- Spec
+- Destructuring
+- Macros
+- Protocols
+- Multimethods
+- interop
+- special forms
+- laziness
+- concurrency&lt;/p&gt;
 </description>
     </item>
     
