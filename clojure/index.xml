@@ -15,18 +15,21 @@
       <pubDate>Fri, 01 Jan 2016 11:24:04 +0300</pubDate>
       
       <guid>http://sercanulucan.com/clojure</guid>
-      <description>&lt;p&gt;Still under construction.
-- Data Structures
-- Namespaces
-- Spec
-- Destructuring
-- Macros
-- Protocols
-- Multimethods
-- interop
-- special forms
-- laziness
-- concurrency&lt;/p&gt;
+      <description>&lt;p&gt;Still under construction.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/blog/2016/11/clojure-scalar-literals&#34;&gt;Scalar Literals&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Collections&lt;/li&gt;
+&lt;li&gt;Destructuring&lt;/li&gt;
+&lt;li&gt;Special Forms&lt;/li&gt;
+&lt;li&gt;Namespaces&lt;/li&gt;
+&lt;li&gt;Laziness&lt;/li&gt;
+&lt;li&gt;Concurrency&lt;/li&gt;
+&lt;li&gt;Macros&lt;/li&gt;
+&lt;li&gt;Protocols&lt;/li&gt;
+&lt;li&gt;Multimethods&lt;/li&gt;
+&lt;li&gt;Spec&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     

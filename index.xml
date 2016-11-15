@@ -6,8 +6,146 @@
     <description>Recent content on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 14 Nov 2016 11:24:04 +0300</lastBuildDate>
+    <lastBuildDate>Tue, 15 Nov 2016 11:24:04 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Clojure Scalar Literals</title>
+      <link>http://sercanulucan.com/blog/2016/11/clojure-scalar-literals/</link>
+      <pubDate>Tue, 15 Nov 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2016/11/clojure-scalar-literals/</guid>
+      <description>
+
+&lt;h3 id=&#34;scalar-literals&#34;&gt;Scalar Literals&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;;This is the content printed to standart out.&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;;=&amp;gt; This is what the function returns&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#string&#34;&gt;String&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#character&#34;&gt;Character&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#boolean&#34;&gt;Boolean&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#nil&#34;&gt;nil&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#keyword&#34;&gt;Keyword&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#symbol&#34;&gt;Symbol&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#numbers&#34;&gt;Numbers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#regular-expression&#34;&gt;Regular Expression&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;string&#34;&gt;String&lt;/h4&gt;
+
+&lt;p&gt;Strings are Java Strings, instance of &lt;code&gt;java.lang.String&lt;/code&gt; and represented with double quotes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;&amp;quot;Hello Clojure&amp;quot;
+;=&amp;gt; &amp;quot;Hello Clojure&amp;quot;
+
+&amp;quot;Hello
+new line&amp;quot;
+;=&amp;gt; &amp;quot;Hello \nnew line&amp;quot;
+
+(println &amp;quot;Life is simple&amp;quot;)
+;Life is simple
+;=&amp;gt; nil
+
+(println &amp;quot;hello with newline,
+prints with newline&amp;quot;)
+;hello with newline,
+;prints with newline
+;=&amp;gt; nil
+
+(println &amp;quot;or you can print with \n newline&amp;quot;)
+;or you can print with
+; newline
+;=&amp;gt; nil
+
+(class &amp;quot;I&#39;m String&amp;quot;)
+;=&amp;gt; java.lang.String
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;character&#34;&gt;Character&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;\s
+;=&amp;gt; \s
+
+\u0053
+;=&amp;gt; \S - Unicode
+
+\o123
+;=&amp;gt; \S - Octal
+
+(class \s)
+;=&amp;gt; java.lang.Character
+
+;special chars
+\space
+;=&amp;gt; \space
+(print \newline)
+;
+;=&amp;gt; nil
+(println \return)
+;
+;=&amp;gt; nil
+\backspace
+;=&amp;gt; \backspace
+\tab
+;=&amp;gt; \tab
+\formfeed
+;=&amp;gt; \formfeed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;boolean&#34;&gt;Boolean&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(class true)
+;=&amp;gt; java.lang.Boolean
+
+false
+;=&amp;gt; false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;nil&#34;&gt;nil&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(class nil)
+;=&amp;gt; nil
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;keyword&#34;&gt;Keyword&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;:apple
+;=&amp;gt; :apple
+(class :peanut)
+;=&amp;gt; clojure.lang.Keyword
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;symbol&#34;&gt;Symbol&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def meaning-of-life 42)
+;=&amp;gt; #&#39;sandbox.core/meaning-of-life
+meaning-of-life
+;=&amp;gt; 42
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;numbers&#34;&gt;Numbers&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(class 42)
+;=&amp;gt; java.lang.Long
+(class 3.14)
+;=&amp;gt; java.lang.Double
+(class 42N)
+;=&amp;gt; clojure.lang.BigInt
+(class 0.01M)
+;=&amp;gt; java.math.BigDecimal
+(class 22/7)
+;=&amp;gt; clojure.lang.Ratio
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;regular-expression&#34;&gt;Regular Expression&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(class #&amp;quot;(m|t)ail&amp;quot;)
+;=&amp;gt; java.util.regex.Pattern
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Postcrossing</title>
@@ -186,9 +324,9 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;14 November 2016&lt;/td&gt;
-&lt;td&gt;4-0-0-0-0-0-0&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;6-0-0-0-0-0-0&lt;/td&gt;
+&lt;td&gt;X-0-0&lt;/td&gt;
+&lt;td&gt;Outliers&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -526,18 +664,21 @@ navigation with a submarine, aviation with both military and civil planes, machi
       <pubDate>Fri, 01 Jan 2016 11:24:04 +0300</pubDate>
       
       <guid>http://sercanulucan.com/clojure</guid>
-      <description>&lt;p&gt;Still under construction.
-- Data Structures
-- Namespaces
-- Spec
-- Destructuring
-- Macros
-- Protocols
-- Multimethods
-- interop
-- special forms
-- laziness
-- concurrency&lt;/p&gt;
+      <description>&lt;p&gt;Still under construction.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/blog/2016/11/clojure-scalar-literals&#34;&gt;Scalar Literals&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Collections&lt;/li&gt;
+&lt;li&gt;Destructuring&lt;/li&gt;
+&lt;li&gt;Special Forms&lt;/li&gt;
+&lt;li&gt;Namespaces&lt;/li&gt;
+&lt;li&gt;Laziness&lt;/li&gt;
+&lt;li&gt;Concurrency&lt;/li&gt;
+&lt;li&gt;Macros&lt;/li&gt;
+&lt;li&gt;Protocols&lt;/li&gt;
+&lt;li&gt;Multimethods&lt;/li&gt;
+&lt;li&gt;Spec&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
@@ -717,20 +858,6 @@ C-r reverse search&lt;/p&gt;
 
 &lt;p&gt;C-h c C-p  help of previous command&lt;br /&gt;
 C-h f previous-line describe a function&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Gitolite and Gitweb Installation </title>
-      <link>http://sercanulucan.com/archive/gitolite/</link>
-      <pubDate>Wed, 02 Oct 2013 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/archive/gitolite/</guid>
-      <description>&lt;p&gt;One of the favorite git repository is gitolite and we can browse repository with gitweb.&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/sercanu/6868868.js&#34;&gt;&lt;/script&gt;
-
-&lt;script src=&#34;//gist.github.com/sercanu/6874474.js&#34;&gt;&lt;/script&gt;
 </description>
     </item>
     

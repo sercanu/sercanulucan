@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="personal website, blog, developer, software engineer">
+
+<base href="http://sercanulucan.com/">
+<title>
+
+
+     Clojure Scalar Literals 
+
+</title>
+<link rel="canonical" href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals/">
+
+
+<script type="text/javascript">
+    var baseURL = 'http:\/\/sercanulucan.com\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+  <link rel="stylesheet" href="http://sercanulucan.com/css/github.css">
+
+
+
+
+
+<link rel="stylesheet" href="http://sercanulucan.com/css/reset.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/pygments.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/main.css">
+
+
+    <link rel="stylesheet" href="http://sercanulucan.com/css/override.css">
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="http://sercanulucan.com/img/favicon.ico"
+
+>
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            <a href="http://sercanulucan.com/"><div class="name">Sercan Ulucan</div></a>
+            <nav>
+                <ul>
+                    <a href="http://sercanulucan.com/blog/"><li>Blog</li></a>
+                    <a href="http://sercanulucan.com/clojure/"><li>Clojure</li></a>
+                    <a href="http://sercanulucan.com/misc/"><li>Misc.</li></a>
+                    <a href="http://sercanulucan.com/archive/"><li>Archive</li></a>
+                    <a href="http://sercanulucan.com/about/"><li>About</li></a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Clojure Scalar Literals
+
+</div>
+
+                    <div class="initials"><a href="http://sercanulucan.com/">ad</a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Tue Nov 15 2016 11:24:04 MSK">Nov 15, 2016</div>
+                    <div class="reading-time"><div class="middot"></div>1 minute read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<h3 id="scalar-literals">Scalar Literals</h3>
+
+<p><code>;This is the content printed to standart out.</code><br />
+<code>;=&gt; This is what the function returns</code></p>
+
+<ul>
+<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#string">String</a></li>
+<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#character">Character</a></li>
+<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#boolean">Boolean</a></li>
+<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#nil">nil</a></li>
+<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#keyword">Keyword</a></li>
+<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#symbol">Symbol</a></li>
+<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#numbers">Numbers</a></li>
+<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#regular-expression">Regular Expression</a></li>
+</ul>
+
+<h4 id="string">String</h4>
+
+<p>Strings are Java Strings, instance of <code>java.lang.String</code> and represented with double quotes.</p>
+
+<pre><code class="language-clojure">&quot;Hello Clojure&quot;
+;=&gt; &quot;Hello Clojure&quot;
+
+&quot;Hello
+new line&quot;
+;=&gt; &quot;Hello \nnew line&quot;
+
+(println &quot;Life is simple&quot;)
+;Life is simple
+;=&gt; nil
+
+(println &quot;hello with newline,
+prints with newline&quot;)
+;hello with newline,
+;prints with newline
+;=&gt; nil
+
+(println &quot;or you can print with \n newline&quot;)
+;or you can print with
+; newline
+;=&gt; nil
+
+(class &quot;I'm String&quot;)
+;=&gt; java.lang.String
+</code></pre>
+
+<h4 id="character">Character</h4>
+
+<pre><code class="language-clojure">\s
+;=&gt; \s
+
+\u0053
+;=&gt; \S - Unicode
+
+\o123
+;=&gt; \S - Octal
+
+(class \s)
+;=&gt; java.lang.Character
+
+;special chars
+\space
+;=&gt; \space
+(print \newline)
+;
+;=&gt; nil
+(println \return)
+;
+;=&gt; nil
+\backspace
+;=&gt; \backspace
+\tab
+;=&gt; \tab
+\formfeed
+;=&gt; \formfeed
+</code></pre>
+
+<h4 id="boolean">Boolean</h4>
+
+<pre><code class="language-clojure">(class true)
+;=&gt; java.lang.Boolean
+
+false
+;=&gt; false
+</code></pre>
+
+<h4 id="nil">nil</h4>
+
+<pre><code class="language-clojure">(class nil)
+;=&gt; nil
+</code></pre>
+
+<h4 id="keyword">Keyword</h4>
+
+<pre><code class="language-clojure">:apple
+;=&gt; :apple
+(class :peanut)
+;=&gt; clojure.lang.Keyword
+</code></pre>
+
+<h4 id="symbol">Symbol</h4>
+
+<pre><code class="language-clojure">(def meaning-of-life 42)
+;=&gt; #'sandbox.core/meaning-of-life
+meaning-of-life
+;=&gt; 42
+</code></pre>
+
+<h4 id="numbers">Numbers</h4>
+
+<pre><code class="language-clojure">(class 42)
+;=&gt; java.lang.Long
+(class 3.14)
+;=&gt; java.lang.Double
+(class 42N)
+;=&gt; clojure.lang.BigInt
+(class 0.01M)
+;=&gt; java.math.BigDecimal
+(class 22/7)
+;=&gt; clojure.lang.Ratio
+</code></pre>
+
+<h4 id="regular-expression">Regular Expression</h4>
+
+<pre><code class="language-clojure">(class #&quot;(m|t)ail&quot;)
+;=&gt; java.util.regex.Pattern
+</code></pre>
+
+                <br>
+                <p><a href="http://sercanulucan.com/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="http://sercanulucan.com/js/highlight.pack.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+
