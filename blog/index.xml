@@ -6,8 +6,39 @@
     <description>Recent content in Blog-rss on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 15 Nov 2016 11:24:04 +0300</lastBuildDate>
+    <lastBuildDate>Wed, 16 Nov 2016 11:24:04 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Marmaris</title>
+      <link>http://sercanulucan.com/blog/2016/11/marmaris/</link>
+      <pubDate>Wed, 16 Nov 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2016/11/marmaris/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://sercanulucan.com/images/20161116_marmaris.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;em&gt;16 November 2016, Marmaris&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Last updated: 16.11.2016, will be updated later&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Today, I&amp;rsquo;d like to write about Marmaris, probably one of the most beautiful place in the world. Okay, you might think that I&amp;rsquo;m exaggerating. I&amp;rsquo;m sure there are lots of beautiful places in the world, however, how can I be neutral if the subject is the place where I grew up? 😄&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t want to bother you with long paragraphs. These are the things make Marmaris special.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Surrounded with &lt;a href=&#34;https://en.wikipedia.org/wiki/Pinus_brutia&#34; target=&#34;_blank&#34;&gt;Turkish pines&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Perfect bay for sailors. No waves, always calm.&lt;/li&gt;
+&lt;li&gt;No factories or anything pollutes environment around.&lt;/li&gt;
+&lt;li&gt;Almost every where is protected area. (I hope the statue doesn&amp;rsquo;t change 😨)&lt;/li&gt;
+&lt;li&gt;Mandarin, orange, lemon, pomegranate, olive, Indian fig&lt;/li&gt;
+&lt;li&gt;Mediterranean cuisine + Turkish cuisine&lt;/li&gt;
+&lt;li&gt;Honestly, some tradespeople are annoying. 😠&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is a map of bays and beaches. It&amp;rsquo;s totally draft. I&amp;rsquo;ll try to write a comprehensive description for each of them. This will be a subject to a&lt;/p&gt;
+
+&lt;iframe src=&#34;https://www.google.com/maps/d/u/0/embed?mid=1kSREB3pDOZZe1pC7KN0ZhsBmcDE&#34; width=&#34;800&#34; height=&#34;450&#34; frameborder=&#34;0&#34; style=&#34;border:0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
     
     <item>
       <title>Clojure Scalar Literals</title>

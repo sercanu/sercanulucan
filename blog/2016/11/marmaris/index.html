@@ -13,10 +13,10 @@
 <title>
 
 
-     Clojure Scalar Literals 
+     Marmaris 
 
 </title>
-<link rel="canonical" href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals/">
+<link rel="canonical" href="http://sercanulucan.com/blog/2016/11/marmaris/">
 
 
 <script type="text/javascript">
@@ -88,147 +88,40 @@
                 <div class="title-container">
                     <div class="page-heading">
 
-    Clojure Scalar Literals
+    Marmaris
 
 </div>
 
                     <div class="initials"><a href="http://sercanulucan.com/">ad</a></div>
                 </div>
                 <div class="meta">
-                    <div class="date" title="Tue Nov 15 2016 11:24:04 MSK">Nov 15, 2016</div>
+                    <div class="date" title="Wed Nov 16 2016 11:24:04 MSK">Nov 16, 2016</div>
                     <div class="reading-time"><div class="middot"></div>1 minute read</div>
                 </div>
             </div>
             <div class="markdown">
-                
+                <p><img src="http://sercanulucan.com/images/20161116_marmaris.png" alt="" /><br />
+<em>16 November 2016, Marmaris</em></p>
 
-<h3 id="scalar-literals">Scalar Literals</h3>
+<p><strong>Last updated: 16.11.2016, will be updated later</strong></p>
 
-<p><code>;This is the content printed to standart out.</code><br />
-<code>;=&gt; This is what the function returns</code></p>
+<p>Today, I&rsquo;d like to write about Marmaris, probably one of the most beautiful place in the world. Okay, you might think that I&rsquo;m exaggerating. I&rsquo;m sure there are lots of beautiful places in the world, however, how can I be neutral if the subject is the place where I grew up? 😄</p>
+
+<p>I don&rsquo;t want to bother you with long paragraphs. These are the things make Marmaris special.</p>
 
 <ul>
-<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#string">String</a></li>
-<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#character">Character</a></li>
-<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#boolean">Boolean</a></li>
-<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#nil">nil</a></li>
-<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#keyword">Keyword</a></li>
-<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#symbol">Symbol</a></li>
-<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#numbers">Numbers</a></li>
-<li><a href="http://sercanulucan.com/blog/2016/11/clojure-scalar-literals#regular-expression">Regular Expression</a></li>
+<li>Surrounded with <a href="https://en.wikipedia.org/wiki/Pinus_brutia" target="_blank">Turkish pines</a>.</li>
+<li>Perfect bay for sailors. No waves, always calm.</li>
+<li>No factories or anything pollutes environment around.</li>
+<li>Almost every where is protected area. (I hope the statue doesn&rsquo;t change 😨)</li>
+<li>Mandarin, orange, lemon, pomegranate, olive, Indian fig</li>
+<li>Mediterranean cuisine + Turkish cuisine</li>
+<li>Honestly, some tradespeople are annoying. 😠</li>
 </ul>
 
-<h4 id="string">String</h4>
+<p>This is a map of bays and beaches. It&rsquo;s totally draft. I&rsquo;ll try to write a comprehensive description for each of them. This will be a subject to a</p>
 
-<p>Strings are Java Strings, instance of <code>java.lang.String</code> and represented with double quotes.</p>
-
-<pre><code class="language-clojure">&quot;Hello Clojure&quot;
-;=&gt; &quot;Hello Clojure&quot;
-
-&quot;Hello
-new line&quot;
-;=&gt; &quot;Hello \nnew line&quot;
-
-(println &quot;Life is simple&quot;)
-;Life is simple
-;=&gt; nil
-
-(println &quot;hello with newline,
-prints with newline&quot;)
-;hello with newline,
-;prints with newline
-;=&gt; nil
-
-(println &quot;or you can print with \n newline&quot;)
-;or you can print with
-; newline
-;=&gt; nil
-
-(class &quot;I'm String&quot;)
-;=&gt; java.lang.String
-</code></pre>
-
-<h4 id="character">Character</h4>
-
-<pre><code class="language-clojure">\s
-;=&gt; \s
-
-\u0053
-;=&gt; \S - Unicode
-
-\o123
-;=&gt; \S - Octal
-
-(class \s)
-;=&gt; java.lang.Character
-
-;special chars
-\space
-;=&gt; \space
-(print \newline)
-;
-;=&gt; nil
-(println \return)
-;
-;=&gt; nil
-\backspace
-;=&gt; \backspace
-\tab
-;=&gt; \tab
-\formfeed
-;=&gt; \formfeed
-</code></pre>
-
-<h4 id="boolean">Boolean</h4>
-
-<pre><code class="language-clojure">(class true)
-;=&gt; java.lang.Boolean
-
-false
-;=&gt; false
-</code></pre>
-
-<h4 id="nil">nil</h4>
-
-<pre><code class="language-clojure">(class nil)
-;=&gt; nil
-</code></pre>
-
-<h4 id="keyword">Keyword</h4>
-
-<pre><code class="language-clojure">:apple
-;=&gt; :apple
-(class :peanut)
-;=&gt; clojure.lang.Keyword
-</code></pre>
-
-<h4 id="symbol">Symbol</h4>
-
-<pre><code class="language-clojure">(def meaning-of-life 42)
-;=&gt; #'sandbox.core/meaning-of-life
-meaning-of-life
-;=&gt; 42
-</code></pre>
-
-<h4 id="numbers">Numbers</h4>
-
-<pre><code class="language-clojure">(class 42)
-;=&gt; java.lang.Long
-(class 3.14)
-;=&gt; java.lang.Double
-(class 42N)
-;=&gt; clojure.lang.BigInt
-(class 0.01M)
-;=&gt; java.math.BigDecimal
-(class 22/7)
-;=&gt; clojure.lang.Ratio
-</code></pre>
-
-<h4 id="regular-expression">Regular Expression</h4>
-
-<pre><code class="language-clojure">(class #&quot;(m|t)ail&quot;)
-;=&gt; java.util.regex.Pattern
-</code></pre>
+<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1kSREB3pDOZZe1pC7KN0ZhsBmcDE" width="800" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
                 <br>
                 <p><a href="http://sercanulucan.com/blog/">Back to posts</a></p>
@@ -238,9 +131,9 @@ meaning-of-life
                 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'sercanu';
-    var disqus_identifier = 'http:\/\/sercanulucan.com\/blog\/2016\/11\/clojure-scalar-literals\/';
-    var disqus_title = 'Clojure Scalar Literals';
-    var disqus_url = 'http:\/\/sercanulucan.com\/blog\/2016\/11\/clojure-scalar-literals\/';
+    var disqus_identifier = 'http:\/\/sercanulucan.com\/blog\/2016\/11\/marmaris\/';
+    var disqus_title = 'Marmaris';
+    var disqus_url = 'http:\/\/sercanulucan.com\/blog\/2016\/11\/marmaris\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

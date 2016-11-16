@@ -6,8 +6,39 @@
     <description>Recent content on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 15 Nov 2016 11:24:04 +0300</lastBuildDate>
+    <lastBuildDate>Wed, 16 Nov 2016 11:24:04 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Marmaris</title>
+      <link>http://sercanulucan.com/blog/2016/11/marmaris/</link>
+      <pubDate>Wed, 16 Nov 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2016/11/marmaris/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://sercanulucan.com/images/20161116_marmaris.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;em&gt;16 November 2016, Marmaris&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Last updated: 16.11.2016, will be updated later&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Today, I&amp;rsquo;d like to write about Marmaris, probably one of the most beautiful place in the world. Okay, you might think that I&amp;rsquo;m exaggerating. I&amp;rsquo;m sure there are lots of beautiful places in the world, however, how can I be neutral if the subject is the place where I grew up? 😄&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t want to bother you with long paragraphs. These are the things make Marmaris special.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Surrounded with &lt;a href=&#34;https://en.wikipedia.org/wiki/Pinus_brutia&#34; target=&#34;_blank&#34;&gt;Turkish pines&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Perfect bay for sailors. No waves, always calm.&lt;/li&gt;
+&lt;li&gt;No factories or anything pollutes environment around.&lt;/li&gt;
+&lt;li&gt;Almost every where is protected area. (I hope the statue doesn&amp;rsquo;t change 😨)&lt;/li&gt;
+&lt;li&gt;Mandarin, orange, lemon, pomegranate, olive, Indian fig&lt;/li&gt;
+&lt;li&gt;Mediterranean cuisine + Turkish cuisine&lt;/li&gt;
+&lt;li&gt;Honestly, some tradespeople are annoying. 😠&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is a map of bays and beaches. It&amp;rsquo;s totally draft. I&amp;rsquo;ll try to write a comprehensive description for each of them. This will be a subject to a&lt;/p&gt;
+
+&lt;iframe src=&#34;https://www.google.com/maps/d/u/0/embed?mid=1kSREB3pDOZZe1pC7KN0ZhsBmcDE&#34; width=&#34;800&#34; height=&#34;450&#34; frameborder=&#34;0&#34; style=&#34;border:0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
     
     <item>
       <title>Clojure Scalar Literals</title>
@@ -770,94 +801,6 @@ navigation with a submarine, aviation with both military and civil planes, machi
 &lt;li&gt;Gently Exceed Your Users&amp;rsquo; Expectations&lt;/li&gt;
 &lt;li&gt;Sign Your Work&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Emacs Shortcuts</title>
-      <link>http://sercanulucan.com/archive/emacs-shortcuts/</link>
-      <pubDate>Mon, 16 Nov 2015 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/archive/emacs-shortcuts/</guid>
-      <description>&lt;p&gt;C-v page down&lt;br /&gt;
-M-v page up&lt;/p&gt;
-
-&lt;p&gt;C-u 8 C-v move 8 lines below&lt;br /&gt;
-C-u 0 C-l move line to top of page&lt;/p&gt;
-
-&lt;p&gt;M-&amp;gt; end of all text&lt;br /&gt;
-M-&amp;lt; beginning of text&lt;/p&gt;
-
-&lt;p&gt;C-l middle of the page&lt;br /&gt;
-C-l C-l&lt;/p&gt;
-
-&lt;p&gt;C-f forward character&lt;br /&gt;
-C-b backward character&lt;/p&gt;
-
-&lt;p&gt;C-n next line&lt;br /&gt;
-C-p previous line&lt;/p&gt;
-
-&lt;p&gt;M-f forward a word&lt;br /&gt;
-M-b backward a word&lt;/p&gt;
-
-&lt;p&gt;C-a beginning of a line&lt;br /&gt;
-C-e end of a line&lt;/p&gt;
-
-&lt;p&gt;M-a begining of a sentence&lt;br /&gt;
-M-e end of a sentence&lt;/p&gt;
-
-&lt;p&gt;C-g cancel command&lt;/p&gt;
-
-&lt;p&gt;C-x C-l run disable command example&lt;/p&gt;
-
-&lt;p&gt;C-x 1 kill other windows&lt;br /&gt;
-C-x 2 divide window&lt;br /&gt;
-C-x o switch to next window&lt;br /&gt;
-C-M-v scroll other window&lt;br /&gt;
-C-x 4 C-f open file in a new window&lt;br /&gt;
-M-x make-frame opens new frame&lt;br /&gt;
-M-x delete-frame deletes frame&lt;/p&gt;
-
-&lt;p&gt;C-h k C-f opens documentation window&lt;/p&gt;
-
-&lt;p&gt;C-u 8 * insert 8 *&lt;/p&gt;
-
-&lt;p&gt;&amp;lt;DEL&amp;gt;    Delete the character just before the cursor&lt;br /&gt;
-C-d          Delete the next character after the cursor&lt;/p&gt;
-
-&lt;p&gt;M-&amp;lt;DEL&amp;gt;  Kill the word immediately before the cursor&lt;br /&gt;
-M-d            Kill the next word after the cursor&lt;/p&gt;
-
-&lt;p&gt;C-k              Kill from the cursor position to end of line&lt;br /&gt;
-M-k             Kill to the end of the current sentence&lt;/p&gt;
-
-&lt;p&gt;C-Space Start selection&lt;/p&gt;
-
-&lt;p&gt;C-/, C-x u, C-_ Undo
-C-g C-/ Redo&lt;/p&gt;
-
-&lt;p&gt;C-w kill selection&lt;br /&gt;
-C-k kill current line&lt;br /&gt;
-M-w copy selection&lt;br /&gt;
-C-y paste clipboard&lt;br /&gt;
-M-y call previous clipboard buffer&lt;/p&gt;
-
-&lt;p&gt;C-x C-f open file&lt;br /&gt;
-C-x C-s save file&lt;/p&gt;
-
-&lt;p&gt;C-x C-b list buffers&lt;/p&gt;
-
-&lt;p&gt;C-x s save buffer&lt;/p&gt;
-
-&lt;p&gt;M-x recover-file FILENAME&lt;/p&gt;
-
-&lt;p&gt;M-x text-mode&lt;/p&gt;
-
-&lt;p&gt;C-s search
-C-r reverse search&lt;/p&gt;
-
-&lt;p&gt;C-h c C-p  help of previous command&lt;br /&gt;
-C-h f previous-line describe a function&lt;/p&gt;
 </description>
     </item>
     
