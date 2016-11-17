@@ -6,8 +6,25 @@
     <description>Recent content in Blog-rss on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 16 Nov 2016 11:24:04 +0300</lastBuildDate>
+    <lastBuildDate>Thu, 17 Nov 2016 11:24:04 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Clojure Collections</title>
+      <link>http://sercanulucan.com/blog/2016/11/clojure-collections/</link>
+      <pubDate>Thu, 17 Nov 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2016/11/clojure-collections/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;List&lt;/li&gt;
+&lt;li&gt;Vector&lt;/li&gt;
+&lt;li&gt;Map&lt;/li&gt;
+&lt;li&gt;Set&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To be done!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Marmaris</title>

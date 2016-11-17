@@ -6,8 +6,25 @@
     <description>Recent content on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 16 Nov 2016 11:24:04 +0300</lastBuildDate>
+    <lastBuildDate>Thu, 17 Nov 2016 11:24:04 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Clojure Collections</title>
+      <link>http://sercanulucan.com/blog/2016/11/clojure-collections/</link>
+      <pubDate>Thu, 17 Nov 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2016/11/clojure-collections/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;List&lt;/li&gt;
+&lt;li&gt;Vector&lt;/li&gt;
+&lt;li&gt;Map&lt;/li&gt;
+&lt;li&gt;Set&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To be done!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Marmaris</title>
@@ -722,85 +739,6 @@ navigation with a submarine, aviation with both military and civil planes, machi
       <description>&lt;p&gt;&lt;img src=&#34;http://sercanulucan.com/images/archive/20151227_zero.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It&amp;rsquo;s an interesting coincidence that my first post is about &lt;a href=&#34;https://en.wikipedia.org/wiki/Zero_(art)&#34; target=&#34;_blank&#34;&gt;Zero&lt;/a&gt;, the art movement raised after second world war to initialize a new beginning. Actually, I have similar feelings for my life and career with the idea of this art, thus, it was an fascinating activity to see the prominent pieces at &lt;a href=&#34;http://www.sakipsabancimuzesi.org/en&#34; target=&#34;_blank&#34;&gt;Sabancı Museum&lt;/a&gt;. In addition, it was interesting to see how artists used vibration, light, space, soot, nail, and other metarials to express their feelings. Although the movement is extremely modern, abstract, and too hard to understand, I enjoyed visiting the museum accompanied with a guide. &lt;a href=&#34;https://www.flickr.com/photos/134530188@N05/sets/72157662247203840/with/23380385513/&#34; target=&#34;_blank&#34;&gt;Here&lt;/a&gt; is an album of the pieces from my camera.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>The Pragmatic Programmer Tips</title>
-      <link>http://sercanulucan.com/archive/the-pragmatic-programmer/</link>
-      <pubDate>Wed, 25 Nov 2015 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/archive/the-pragmatic-programmer/</guid>
-      <description>&lt;ul&gt;
-&lt;li&gt;Care About Your Craft&lt;/li&gt;
-&lt;li&gt;Think! About Your Work&lt;/li&gt;
-&lt;li&gt;Provide Options, Don&amp;rsquo;t Make Lame Excuses&lt;/li&gt;
-&lt;li&gt;Don&amp;rsquo;t Live with Broken Windows&lt;/li&gt;
-&lt;li&gt;Be a Catalyst for Change&lt;/li&gt;
-&lt;li&gt;Remember the Big Picture&lt;/li&gt;
-&lt;li&gt;Make Quality a Requirements Issue&lt;/li&gt;
-&lt;li&gt;Invest Regularly in Your Knowledge Portfolio&lt;/li&gt;
-&lt;li&gt;Critically Analyze What You Read and Hear&lt;/li&gt;
-&lt;li&gt;It&amp;rsquo;s Both What You Say and the Way You Say It&lt;/li&gt;
-&lt;li&gt;DRY—Don&amp;rsquo;t Repeat Yourself&lt;/li&gt;
-&lt;li&gt;Make It Easy to Reuse&lt;/li&gt;
-&lt;li&gt;Eliminate Effects Between Unrelated Things&lt;/li&gt;
-&lt;li&gt;There Are No Final Decisions&lt;/li&gt;
-&lt;li&gt;Use Tracer Bullets to Find the Target&lt;/li&gt;
-&lt;li&gt;Prototype to Learn&lt;/li&gt;
-&lt;li&gt;Program Close to the Problem domain&lt;/li&gt;
-&lt;li&gt;Estimate to Avoid Surprises&lt;/li&gt;
-&lt;li&gt;Iterate the Schedule with the Code&lt;/li&gt;
-&lt;li&gt;Keep Knowledge in Plain Text&lt;/li&gt;
-&lt;li&gt;Use the Power of Command Shells&lt;/li&gt;
-&lt;li&gt;Use a Single Editor Well&lt;/li&gt;
-&lt;li&gt;Always Use Source Code Control&lt;/li&gt;
-&lt;li&gt;Fix the Problem, Not the Blame&lt;/li&gt;
-&lt;li&gt;Don&amp;rsquo;t Panic&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;select&amp;rdquo; Isn&amp;rsquo;t Broken&lt;/li&gt;
-&lt;li&gt;Don&amp;rsquo;t Assume It—Prove It&lt;/li&gt;
-&lt;li&gt;Learn a Text Manipulation Language&lt;/li&gt;
-&lt;li&gt;Write Code That Writes Code&lt;/li&gt;
-&lt;li&gt;You Can&amp;rsquo;t Write Perfect Software&lt;/li&gt;
-&lt;li&gt;Design with Contracts&lt;/li&gt;
-&lt;li&gt;Crash Early&lt;/li&gt;
-&lt;li&gt;If It Can&amp;rsquo;t Happen, Use Assertions to Ensure That It Won&amp;rsquo;t&lt;/li&gt;
-&lt;li&gt;Use Exceptions for Exceptional Problems&lt;/li&gt;
-&lt;li&gt;Finish What You Start&lt;/li&gt;
-&lt;li&gt;Configure, Don&amp;rsquo;t Integrate&lt;/li&gt;
-&lt;li&gt;Put Abstractions in Code Details in Metadata&lt;/li&gt;
-&lt;li&gt;Analyze Workflow to Improve Concurrency&lt;/li&gt;
-&lt;li&gt;Design Using Services&lt;/li&gt;
-&lt;li&gt;Always Design for Concurrency&lt;/li&gt;
-&lt;li&gt;Separate Views from Models&lt;/li&gt;
-&lt;li&gt;Use Blackboards to Coordinate Workflow&lt;/li&gt;
-&lt;li&gt;Don&amp;rsquo;t Program by Coincidence&lt;/li&gt;
-&lt;li&gt;Estimate the Order of Your Algorithms&lt;/li&gt;
-&lt;li&gt;Test Your Estimates&lt;/li&gt;
-&lt;li&gt;Refactor Early, Refactor Often&lt;/li&gt;
-&lt;li&gt;Design to Test&lt;/li&gt;
-&lt;li&gt;Test Your Software, or Your Users Will&lt;/li&gt;
-&lt;li&gt;Don&amp;rsquo;t Use Wizard Code You Don&amp;rsquo;t Understand&lt;/li&gt;
-&lt;li&gt;Don&amp;rsquo;t Gather Requirements—Dig for Them&lt;/li&gt;
-&lt;li&gt;Abstractions Live Longer than Details&lt;/li&gt;
-&lt;li&gt;Use a Project Glossary&lt;/li&gt;
-&lt;li&gt;Don&amp;rsquo;t Think Outside the Box—Find the Box&lt;/li&gt;
-&lt;li&gt;Listen to Nagging Doubts—Start When You&amp;rsquo;re Ready&lt;/li&gt;
-&lt;li&gt;Some Things Are Better Done than Described&lt;/li&gt;
-&lt;li&gt;Don&amp;rsquo;t Be a Slave to Formal Methods&lt;/li&gt;
-&lt;li&gt;Expensive Too Do Not Produce Better Designs&lt;/li&gt;
-&lt;li&gt;Organize Around Functionality, Not Job Functions&lt;/li&gt;
-&lt;li&gt;Don&amp;rsquo;t Use Manual Procedures&lt;/li&gt;
-&lt;li&gt;Test Early. Test Often. Test Automatically.&lt;/li&gt;
-&lt;li&gt;Coding Ain&amp;rsquo;t Done &amp;lsquo;Til All the Tests Run&lt;/li&gt;
-&lt;li&gt;Use Saboteurs to Test Your Testing&lt;/li&gt;
-&lt;li&gt;Test State Coverage, Not Code Coverage&lt;/li&gt;
-&lt;li&gt;Find Bugs Once&lt;/li&gt;
-&lt;li&gt;Treat English as Just Another Programming Language&lt;/li&gt;
-&lt;li&gt;Build Documentation In, Don&amp;rsquo;t Bolt It On&lt;/li&gt;
-&lt;li&gt;Gently Exceed Your Users&amp;rsquo; Expectations&lt;/li&gt;
-&lt;li&gt;Sign Your Work&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
