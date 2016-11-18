@@ -6,8 +6,18 @@
     <description>Recent content in Blog-rss on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 17 Nov 2016 11:24:04 +0300</lastBuildDate>
+    <lastBuildDate>Fri, 18 Nov 2016 11:24:04 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Clojure Destructuring</title>
+      <link>http://sercanulucan.com/blog/2016/11/clojure-destructuring/</link>
+      <pubDate>Fri, 18 Nov 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2016/11/clojure-destructuring/</guid>
+      <description>&lt;p&gt;To be done!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Clojure Collections</title>

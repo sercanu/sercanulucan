@@ -6,8 +6,18 @@
     <description>Recent content on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 17 Nov 2016 11:24:04 +0300</lastBuildDate>
+    <lastBuildDate>Fri, 18 Nov 2016 11:24:04 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Clojure Destructuring</title>
+      <link>http://sercanulucan.com/blog/2016/11/clojure-destructuring/</link>
+      <pubDate>Fri, 18 Nov 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2016/11/clojure-destructuring/</guid>
+      <description>&lt;p&gt;To be done!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Clojure Collections</title>
@@ -727,18 +737,6 @@ navigation with a submarine, aviation with both military and civil planes, machi
 &lt;li&gt;Multimethods&lt;/li&gt;
 &lt;li&gt;Spec&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Zero Art Movement</title>
-      <link>http://sercanulucan.com/archive/Zero-Art-Movement/</link>
-      <pubDate>Sun, 27 Dec 2015 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/archive/Zero-Art-Movement/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://sercanulucan.com/images/archive/20151227_zero.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s an interesting coincidence that my first post is about &lt;a href=&#34;https://en.wikipedia.org/wiki/Zero_(art)&#34; target=&#34;_blank&#34;&gt;Zero&lt;/a&gt;, the art movement raised after second world war to initialize a new beginning. Actually, I have similar feelings for my life and career with the idea of this art, thus, it was an fascinating activity to see the prominent pieces at &lt;a href=&#34;http://www.sakipsabancimuzesi.org/en&#34; target=&#34;_blank&#34;&gt;Sabancı Museum&lt;/a&gt;. In addition, it was interesting to see how artists used vibration, light, space, soot, nail, and other metarials to express their feelings. Although the movement is extremely modern, abstract, and too hard to understand, I enjoyed visiting the museum accompanied with a guide. &lt;a href=&#34;https://www.flickr.com/photos/134530188@N05/sets/72157662247203840/with/23380385513/&#34; target=&#34;_blank&#34;&gt;Here&lt;/a&gt; is an album of the pieces from my camera.&lt;/p&gt;
 </description>
     </item>
     
