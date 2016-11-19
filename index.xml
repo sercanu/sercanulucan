@@ -6,8 +6,18 @@
     <description>Recent content on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 18 Nov 2016 11:24:04 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 19 Nov 2016 11:24:04 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Clojure Namespaces</title>
+      <link>http://sercanulucan.com/blog/2016/11/clojure-namespaces/</link>
+      <pubDate>Sat, 19 Nov 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2016/11/clojure-namespaces/</guid>
+      <description>&lt;p&gt;To be done!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Clojure Destructuring</title>
@@ -713,30 +723,6 @@ meaning-of-life
 There are many unique and well prepared items and collections from different places of the world.
 The main categories are Mustafa Kemal Atatürk, road transport with wonderful cars, rail transport with real locomotives,
 navigation with a submarine, aviation with both military and civil planes, machinery, communication, scientific devices, models and toys, and the exhibitions was about Dolls Houses. It would take more than one day to observe every item in detail. The cafes in the museum were pretty good and cheap, thus, it&amp;rsquo;s possible to have a rest during the exhausting day. &lt;a href=&#34;https://www.flickr.com/photos/134530188@N05/sets/72157660751378324&#34; target=&#34;_blank&#34;&gt;Here&lt;/a&gt; is an album of the pieces from my camera.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Clojure</title>
-      <link>http://sercanulucan.com/clojure</link>
-      <pubDate>Fri, 01 Jan 2016 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/clojure</guid>
-      <description>&lt;p&gt;Still under construction.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/blog/2016/11/clojure-scalar-literals&#34;&gt;Scalar Literals&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Collections&lt;/li&gt;
-&lt;li&gt;Destructuring&lt;/li&gt;
-&lt;li&gt;Special Forms&lt;/li&gt;
-&lt;li&gt;Namespaces&lt;/li&gt;
-&lt;li&gt;Laziness&lt;/li&gt;
-&lt;li&gt;Concurrency&lt;/li&gt;
-&lt;li&gt;Macros&lt;/li&gt;
-&lt;li&gt;Protocols&lt;/li&gt;
-&lt;li&gt;Multimethods&lt;/li&gt;
-&lt;li&gt;Spec&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
