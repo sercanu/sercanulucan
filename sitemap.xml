@@ -3,22 +3,7 @@
   
   <url>
     <loc>http://sercanulucan.com/</loc>
-    <lastmod>2016-11-19T11:24:04+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sercanulucan.com/blog/2016/11/clojure-namespaces/</loc>
-    <lastmod>2016-11-19T11:24:04+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sercanulucan.com/blog/2016/11/clojure-destructuring/</loc>
-    <lastmod>2016-11-18T11:24:04+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sercanulucan.com/blog/2016/11/clojure-collections/</loc>
-    <lastmod>2016-11-17T11:24:04+03:00</lastmod>
+    <lastmod>2016-11-16T11:24:04+03:00</lastmod>
   </url>
   
   <url>
@@ -62,6 +47,11 @@
   </url>
   
   <url>
+    <loc>http://sercanulucan.com/misc/learnings</loc>
+    <lastmod>2016-10-31T11:24:04+03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sercanulucan.com/misc/links</loc>
     <lastmod>2016-10-31T11:24:04+03:00</lastmod>
   </url>
@@ -73,6 +63,11 @@
   
   <url>
     <loc>http://sercanulucan.com/misc/quotes</loc>
+    <lastmod>2016-10-31T11:24:04+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sercanulucan.com/misc/vocabulary</loc>
     <lastmod>2016-10-31T11:24:04+03:00</lastmod>
   </url>
   

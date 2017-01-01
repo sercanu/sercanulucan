@@ -6,45 +6,8 @@
     <description>Recent content on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sat, 19 Nov 2016 11:24:04 +0300</lastBuildDate>
+    <lastBuildDate>Wed, 16 Nov 2016 11:24:04 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Clojure Namespaces</title>
-      <link>http://sercanulucan.com/blog/2016/11/clojure-namespaces/</link>
-      <pubDate>Sat, 19 Nov 2016 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/blog/2016/11/clojure-namespaces/</guid>
-      <description>&lt;p&gt;To be done!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Clojure Destructuring</title>
-      <link>http://sercanulucan.com/blog/2016/11/clojure-destructuring/</link>
-      <pubDate>Fri, 18 Nov 2016 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/blog/2016/11/clojure-destructuring/</guid>
-      <description>&lt;p&gt;To be done!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Clojure Collections</title>
-      <link>http://sercanulucan.com/blog/2016/11/clojure-collections/</link>
-      <pubDate>Thu, 17 Nov 2016 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/blog/2016/11/clojure-collections/</guid>
-      <description>&lt;ul&gt;
-&lt;li&gt;List&lt;/li&gt;
-&lt;li&gt;Vector&lt;/li&gt;
-&lt;li&gt;Map&lt;/li&gt;
-&lt;li&gt;Set&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;To be done!&lt;/p&gt;
-</description>
-    </item>
     
     <item>
       <title>Marmaris</title>
@@ -441,6 +404,26 @@ meaning-of-life
     </item>
     
     <item>
+      <title>Learnings</title>
+      <link>http://sercanulucan.com/misc/learnings</link>
+      <pubDate>Mon, 31 Oct 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/misc/learnings</guid>
+      <description>&lt;p&gt;&lt;em&gt;Jan 1&lt;/em&gt;&lt;/p&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_cognitive_biases&#34; target=&#34;_blank&#34;&gt;Ultimate List of Cognitive biases&lt;/a&gt;&lt;br /&gt;&lt;/dt&gt;
+&lt;dd&gt;Each item of the list is a must read. Explains our behaviours&amp;rsquo; reasons.&lt;/dd&gt;
+&lt;dt&gt;From ‘The 10X Rule’ by Grant Cardone&lt;/dt&gt;
+&lt;dd&gt;Until you become completely obsessed with your mission, no one will take you seriously. Until the world understands that you’re not going away — that you are 100 percent committed and have complete and utter conviction and will persist in pursuing your project — you will not get the attention you need and the support you want.&lt;br /&gt;&lt;/dd&gt;
+&lt;dt&gt;From ‘Influence’, by Robert Cialdini&lt;br /&gt;&lt;/dt&gt;
+&lt;dd&gt;One of the most powerful forms of influence is the rule of reciprocation. The rule states that people often try to repay, in kind, what another person has provided for them.
+The example of a simple mail appeal for donations produces a response rate of around 18 percent. But when the mailing also includes an unsolicited gift (with gummed, individualised address labels), the success rate nearly doubles to 35 percent.&lt;/dd&gt;
+&lt;/dl&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Links</title>
       <link>http://sercanulucan.com/misc/links</link>
       <pubDate>Mon, 31 Oct 2016 11:24:04 +0300</pubDate>
@@ -669,9 +652,10 @@ meaning-of-life
       <guid>http://sercanulucan.com/misc</guid>
       <description>&lt;p&gt;Here are some stuff aside from posts.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://sercanulucan.com/misc/progress/&#34;&gt;Pomodoros and Workouts&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://sercanulucan.com/misc/links/&#34;&gt;Link Collections&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://sercanulucan.com/misc/quotes/&#34;&gt;Favourite Quotes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://sercanulucan.com/misc/learnings/&#34;&gt;Learnings&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;http://sercanulucan.com/misc/vocabulary/&#34;&gt;Vocabulary&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;http://sercanulucan.com/misc/links/&#34;&gt;Link Collections Before 2017&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;http://sercanulucan.com/misc/quotes/&#34;&gt;Favourite Quotes Before 2017&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -712,6 +696,25 @@ meaning-of-life
     </item>
     
     <item>
+      <title>Vocabulary</title>
+      <link>http://sercanulucan.com/misc/vocabulary</link>
+      <pubDate>Mon, 31 Oct 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/misc/vocabulary</guid>
+      <description>&lt;p&gt;&lt;em&gt;Jan 1&lt;/em&gt;&lt;/p&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;distort&lt;br /&gt;&lt;/dt&gt;
+&lt;dd&gt;Another one is the misinformation effect, a memory bias in which we subconsciously incorporate new information to distort memory of the original event.&lt;br /&gt;&lt;/dd&gt;
+&lt;dt&gt;impede&lt;br /&gt;&lt;/dt&gt;
+&lt;dd&gt;Together, the cumulative implications of these biases impede our ability to form the accurate and complete picture needed for effective reflection.&lt;/dd&gt;
+&lt;dt&gt;disposal&lt;br /&gt;&lt;/dt&gt;
+&lt;dd&gt;We are all investors; the currency at our disposal is time and energy.&lt;/dd&gt;
+&lt;/dl&gt;
+</description>
+    </item>
+    
+    <item>
       <title>RMK Museum</title>
       <link>http://sercanulucan.com/archive/RMK-Museum/</link>
       <pubDate>Sat, 02 Jan 2016 11:24:04 +0300</pubDate>
@@ -723,6 +726,30 @@ meaning-of-life
 There are many unique and well prepared items and collections from different places of the world.
 The main categories are Mustafa Kemal Atatürk, road transport with wonderful cars, rail transport with real locomotives,
 navigation with a submarine, aviation with both military and civil planes, machinery, communication, scientific devices, models and toys, and the exhibitions was about Dolls Houses. It would take more than one day to observe every item in detail. The cafes in the museum were pretty good and cheap, thus, it&amp;rsquo;s possible to have a rest during the exhausting day. &lt;a href=&#34;https://www.flickr.com/photos/134530188@N05/sets/72157660751378324&#34; target=&#34;_blank&#34;&gt;Here&lt;/a&gt; is an album of the pieces from my camera.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Clojure</title>
+      <link>http://sercanulucan.com/clojure</link>
+      <pubDate>Fri, 01 Jan 2016 11:24:04 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/clojure</guid>
+      <description>&lt;p&gt;Still under construction.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://sercanulucan.com/blog/2016/11/clojure-scalar-literals&#34;&gt;Scalar Literals&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Collections&lt;/li&gt;
+&lt;li&gt;Destructuring&lt;/li&gt;
+&lt;li&gt;Special Forms&lt;/li&gt;
+&lt;li&gt;Namespaces&lt;/li&gt;
+&lt;li&gt;Laziness&lt;/li&gt;
+&lt;li&gt;Concurrency&lt;/li&gt;
+&lt;li&gt;Macros&lt;/li&gt;
+&lt;li&gt;Protocols&lt;/li&gt;
+&lt;li&gt;Multimethods&lt;/li&gt;
+&lt;li&gt;Spec&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
