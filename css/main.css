@@ -617,6 +617,7 @@ section.main .content .markdown code {
   /* enclosed by single backtick (`) */
   padding: .15em .5em;
   border-radius: 2px;
+  background: #fdf6e3;
 }
 section.main .content .markdown pre {
   /* Hugo specific: consider using the 'highlight' shortcode */
