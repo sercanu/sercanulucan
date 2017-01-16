@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="personal website, blog, developer, software engineer">
+
+<base href="http://sercanulucan.com/">
+<title>
+
+
+     Emacs, One More Time 
+
+</title>
+<link rel="canonical" href="http://sercanulucan.com/blog/2017/01/emacs-one-more-time/">
+
+
+<script type="text/javascript">
+    var baseURL = 'http:\/\/sercanulucan.com\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+<link rel="stylesheet" href="http://sercanulucan.com/css/solarized-light.css">  
+
+<link rel="stylesheet" href="http://sercanulucan.com/css/reset.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/pygments.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/main.css"> 
+<link rel="stylesheet" href="http://sercanulucan.com/css/override.css">  
+
+
+<link rel="shortcut icon"  href="http://sercanulucan.com/img/favicon.ico" >
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            <a href="http://sercanulucan.com/"><div class="name">Sercan Ulucan</div></a>
+            <nav>
+                <ul>
+                    <a href="http://sercanulucan.com/blog/"><li>Blog</li></a>
+                    <a href="http://sercanulucan.com/clojure/"><li>Clojure</li></a>
+                    <a href="http://sercanulucan.com/misc/"><li>Misc.</li></a>
+                    <a href="http://sercanulucan.com/archive/"><li>Archive</li></a>
+                    <a href="http://sercanulucan.com/about/"><li>About</li></a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Emacs, One More Time
+
+</div>
+
+                    <div class="initials"><a href="http://sercanulucan.com/">ad</a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Mon Jan 16 2017 00:00:00 MSK">Jan 16, 2017</div>
+                    <div class="reading-time"><div class="middot"></div>3 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>Last year, I decided to use Emacs for Clojure development. It is the most common, mature and the richest development environment for this task. After downloading and installation, I got a clean setup.</p>
+
+<p>I read documents, followed the tutorials. I started to understand the terminology and the shortcuts. Window, frame, buffer, modes&hellip; Nothing was working according to my intuitions, but I didn&rsquo;t step back and kept practicing on.</p>
+
+<p>I watched videos, read the guide at <a href="http://www.braveclojure.com/basic-emacs/" target="_blank">braveclojure.com</a>, read more documents and started customizations. However, things were not easy, configuration was hard. I was obsessed to build the dream environment for Clojure development, but I was fighting against the editor. Anyway, I believe the motto <strong>&ldquo;No pain, No gain&rdquo;</strong> in heart.</p>
+
+<h3 id="oh-distributions">Oh, Distributions!</h3>
+
+<p>While I was reading about the configurations, I saw references to some distributions. <a href="http://spacemacs.org/" target="_blank">Spacemacs</a> and <a href="http://batsov.com/prelude/" target="_blank">Prelude</a> were the ready made configurations that I was trying do. Please have a look at them if you&rsquo;re new to Emacs. I <strong>choose Spacemacs</strong>, it was more popular and it looked really cool.</p>
+
+<p>After reading Spacemacs documentation, I began to customize it. It wasn&rsquo;t hard but you need to be ready for surprises. For example, if you wan&rsquo;t to change the font-size, you just edit the configuration file and reload it. (with a key combination) Oops&hellip; nothing happened. Why? Because the default font <strong>isn&rsquo;t supported</strong> at 16px. I&rsquo;m using a Mac and I didn&rsquo;t expect this. Anyway, I changed the font to Menlo and it worked.</p>
+
+<p>I was very serious to grasp the best practices. Every documentation or tutorial was referencing to <a href="http://orgmode.org/" target="_blank">Org mode</a>. It seemed worthy to learn, I read a lot, I really tried to use it while taking notes, planning or even generating a static website, but I didn&rsquo;t like it. Maybe it was <strong>my fault</strong> to get busy with irrelevant things. I should have focused to <a href="https://github.com/clojure-emacs/cider" target="_blank">Cider</a> and Clojure things.</p>
+
+<h3 id="yes-pain-no-gain">Yes Pain, No gain</h3>
+
+<p>Keybindings were nightmare. I could never configured them in a right way. I couldn&rsquo;t use slurp and barf shortcuts of <a href="http://danmidwood.com/content/2014/11/21/animated-paredit.html" target="_blank">Paredit</a>. Maybe this wasn&rsquo;t so important, but I was obsessed.</p>
+
+<p>Switching between windows wasn&rsquo;t easy. I lost the REPL window many times. Any wrong command was ruining current setup heavily. I couldn&rsquo;t figure out how to take back my faulty commands. I was hiding something forever or falling in a hopeless situation.</p>
+
+<p>I&rsquo;m very used to see the project folder at the right side of the window. So, I searched for a package and found <a href="https://github.com/jaypei/emacs-neotree" target="_blank">NeoTree</a>. After many attempts of getting used to shortcuts, I was happy to see my files at the left sidebar, until opening a new project. NeoTree was working only for one frame, it was a <strong>single instance</strong>. It wasn&rsquo;t possible to work at more than one project at the same time.</p>
+
+<p>All these experiments took several evenings and several weekends. I wasn&rsquo;t learning Clojure, I was struggling with Emacs all the time, and I stopped.</p>
+
+<h3 id="one-more-time">One More Time</h3>
+
+<p>Today, I decided to try one more time. This time I&rsquo;m experienced and I&rsquo;m focused to write a single Clojure function. I installed the latest version of Emacs, renamed my .emacs.d folder and .spacemacs file. I started from scratch to build a new setup. I cloned the Spacemacs repo, add Clojure to modes and barely open a Clojure project. I started editing the file and wrote my first <code>defn</code> Oops&hellip;, <strong>I couldn&rsquo;t type square brackets</strong> with Alt+8. I received &ldquo;No window numbered 8&rdquo;. Huh&hellip; very disappointing.</p>
+
+<p>Okay, many people are comfortable at using Emacs. This means <strong>it&rsquo;s my problem</strong> but I really don&rsquo;t know what is the wrong with me :) I don&rsquo;t get how it works for others.</p>
+
+<p>I use <a href="https://github.com/jasongilman/proto-repl" target="_blank">Proto REPL</a> now. It has some problems but it&rsquo;s easy. Also Cursive is an option too, but I think it should be simplified and work as an independent IDE.</p>
+
+                <br>
+                <p><a href="http://sercanulucan.com/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sercanu';
+    var disqus_identifier = 'http:\/\/sercanulucan.com\/blog\/2017\/01\/emacs-one-more-time\/';
+    var disqus_title = 'Emacs, One More Time';
+    var disqus_url = 'http:\/\/sercanulucan.com\/blog\/2017\/01\/emacs-one-more-time\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("UA-90387873-1");
+    pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+
+  <script src="http://sercanulucan.com/js/highlight.pack.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+
