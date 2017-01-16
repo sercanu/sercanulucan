@@ -6,8 +6,50 @@
     <description>Recent content on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 15 Jan 2017 00:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Mon, 16 Jan 2017 00:00:00 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Emacs, One More Time</title>
+      <link>http://sercanulucan.com/blog/2017/01/emacs-one-more-time/</link>
+      <pubDate>Mon, 16 Jan 2017 00:00:00 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2017/01/emacs-one-more-time/</guid>
+      <description>
+
+&lt;p&gt;Last year, I decided to use Emacs for Clojure development. It is the most common, mature and the richest development environment for this task. After downloading and installation, I got a clean setup.&lt;/p&gt;
+
+&lt;p&gt;I read documents, followed the tutorials. I started to understand the terminology and the shortcuts. Window, frame, buffer, modes&amp;hellip; Nothing was working according to my intuitions, but I didn&amp;rsquo;t step back and kept practicing on.&lt;/p&gt;
+
+&lt;p&gt;I watched videos, read the guide at &lt;a href=&#34;http://www.braveclojure.com/basic-emacs/&#34; target=&#34;_blank&#34;&gt;braveclojure.com&lt;/a&gt;, read more documents and started customizations. However, things were not easy, configuration was hard. I was obsessed to build the dream environment for Clojure development, but I was fighting against the editor. Anyway, I believe the motto &lt;strong&gt;&amp;ldquo;No pain, No gain&amp;rdquo;&lt;/strong&gt; in heart.&lt;/p&gt;
+
+&lt;h3 id=&#34;oh-distributions&#34;&gt;Oh, Distributions!&lt;/h3&gt;
+
+&lt;p&gt;While I was reading about the configurations, I saw references to some distributions. &lt;a href=&#34;http://spacemacs.org/&#34; target=&#34;_blank&#34;&gt;Spacemacs&lt;/a&gt; and &lt;a href=&#34;http://batsov.com/prelude/&#34; target=&#34;_blank&#34;&gt;Prelude&lt;/a&gt; were the ready made configurations that I was trying do. Please have a look at them if you&amp;rsquo;re new to Emacs. I &lt;strong&gt;choose Spacemacs&lt;/strong&gt;, it was more popular and it looked really cool.&lt;/p&gt;
+
+&lt;p&gt;After reading Spacemacs documentation, I began to customize it. It wasn&amp;rsquo;t hard but you need to be ready for surprises. For example, if you wan&amp;rsquo;t to change the font-size, you just edit the configuration file and reload it. (with a key combination) Oops&amp;hellip; nothing happened. Why? Because the default font &lt;strong&gt;isn&amp;rsquo;t supported&lt;/strong&gt; at 16px. I&amp;rsquo;m using a Mac and I didn&amp;rsquo;t expect this. Anyway, I changed the font to Menlo and it worked.&lt;/p&gt;
+
+&lt;p&gt;I was very serious to grasp the best practices. Every documentation or tutorial was referencing to &lt;a href=&#34;http://orgmode.org/&#34; target=&#34;_blank&#34;&gt;Org mode&lt;/a&gt;. It seemed worthy to learn, I read a lot, I really tried to use it while taking notes, planning or even generating a static website, but I didn&amp;rsquo;t like it. Maybe it was &lt;strong&gt;my fault&lt;/strong&gt; to get busy with irrelevant things. I should have focused to &lt;a href=&#34;https://github.com/clojure-emacs/cider&#34; target=&#34;_blank&#34;&gt;Cider&lt;/a&gt; and Clojure things.&lt;/p&gt;
+
+&lt;h3 id=&#34;yes-pain-no-gain&#34;&gt;Yes Pain, No gain&lt;/h3&gt;
+
+&lt;p&gt;Keybindings were nightmare. I could never configured them in a right way. I couldn&amp;rsquo;t use slurp and barf shortcuts of &lt;a href=&#34;http://danmidwood.com/content/2014/11/21/animated-paredit.html&#34; target=&#34;_blank&#34;&gt;Paredit&lt;/a&gt;. Maybe this wasn&amp;rsquo;t so important, but I was obsessed.&lt;/p&gt;
+
+&lt;p&gt;Switching between windows wasn&amp;rsquo;t easy. I lost the REPL window many times. Any wrong command was ruining current setup heavily. I couldn&amp;rsquo;t figure out how to take back my faulty commands. I was hiding something forever or falling in a hopeless situation.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m very used to see the project folder at the right side of the window. So, I searched for a package and found &lt;a href=&#34;https://github.com/jaypei/emacs-neotree&#34; target=&#34;_blank&#34;&gt;NeoTree&lt;/a&gt;. After many attempts of getting used to shortcuts, I was happy to see my files at the left sidebar, until opening a new project. NeoTree was working only for one frame, it was a &lt;strong&gt;single instance&lt;/strong&gt;. It wasn&amp;rsquo;t possible to work at more than one project at the same time.&lt;/p&gt;
+
+&lt;p&gt;All these experiments took several evenings and several weekends. I wasn&amp;rsquo;t learning Clojure, I was struggling with Emacs all the time, and I stopped.&lt;/p&gt;
+
+&lt;h3 id=&#34;one-more-time&#34;&gt;One More Time&lt;/h3&gt;
+
+&lt;p&gt;Today, I decided to try one more time. This time I&amp;rsquo;m experienced and I&amp;rsquo;m focused to write a single Clojure function. I installed the latest version of Emacs, renamed my .emacs.d folder and .spacemacs file. I started from scratch to build a new setup. I cloned the Spacemacs repo, add Clojure to modes and barely open a Clojure project. I started editing the file and wrote my first &lt;code&gt;defn&lt;/code&gt; Oops&amp;hellip;, &lt;strong&gt;I couldn&amp;rsquo;t type square brackets&lt;/strong&gt; with Alt+8. I received &amp;ldquo;No window numbered 8&amp;rdquo;. Huh&amp;hellip; very disappointing.&lt;/p&gt;
+
+&lt;p&gt;Okay, many people are comfortable at using Emacs. This means &lt;strong&gt;it&amp;rsquo;s my problem&lt;/strong&gt; but I really don&amp;rsquo;t know what is the wrong with me :) I don&amp;rsquo;t get how it works for others.&lt;/p&gt;
+
+&lt;p&gt;I use &lt;a href=&#34;https://github.com/jasongilman/proto-repl&#34; target=&#34;_blank&#34;&gt;Proto REPL&lt;/a&gt; now. It has some problems but it&amp;rsquo;s easy. Also Cursive is an option too, but I think it should be simplified and work as an independent IDE.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Vocabulary Improvement Never Ends</title>
@@ -1203,21 +1245,6 @@ The example of a simple mail appeal for donations produces a response rate of ar
 &lt;dd&gt;he act of getting rid of something, especially by throwing it away.&lt;br /&gt;
 &lt;em&gt;We are all investors; the currency at our disposal is time and energy.&lt;/em&gt;&lt;/dd&gt;
 &lt;/dl&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>RMK Museum</title>
-      <link>http://sercanulucan.com/archive/RMK-Museum/</link>
-      <pubDate>Sat, 02 Jan 2016 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/archive/RMK-Museum/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://sercanulucan.com/images/archive/20160102_rmk.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;One of the greatest museum to visit in Istanbul is &lt;a href=&#34;http://www.rmk-museum.org.tr/en/index.htm&#34; target=&#34;_blank&#34;&gt;RMK Museum&lt;/a&gt;.
-There are many unique and well prepared items and collections from different places of the world.
-The main categories are Mustafa Kemal Atatürk, road transport with wonderful cars, rail transport with real locomotives,
-navigation with a submarine, aviation with both military and civil planes, machinery, communication, scientific devices, models and toys, and the exhibitions was about Dolls Houses. It would take more than one day to observe every item in detail. The cafes in the museum were pretty good and cheap, thus, it&amp;rsquo;s possible to have a rest during the exhausting day. &lt;a href=&#34;https://www.flickr.com/photos/134530188@N05/sets/72157660751378324&#34; target=&#34;_blank&#34;&gt;Here&lt;/a&gt; is an album of the pieces from my camera.&lt;/p&gt;
 </description>
     </item>
     
