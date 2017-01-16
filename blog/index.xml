@@ -31,13 +31,13 @@
 
 &lt;p&gt;I was very serious to grasp the best practices. Every documentation or tutorial was referencing to &lt;a href=&#34;http://orgmode.org/&#34; target=&#34;_blank&#34;&gt;Org mode&lt;/a&gt;. It seemed worthy to learn, I read a lot, I really tried to use it while taking notes, planning or even generating a static website, but I didn&amp;rsquo;t like it. Maybe it was &lt;strong&gt;my fault&lt;/strong&gt; to get busy with irrelevant things. I should have focused to &lt;a href=&#34;https://github.com/clojure-emacs/cider&#34; target=&#34;_blank&#34;&gt;Cider&lt;/a&gt; and Clojure things.&lt;/p&gt;
 
-&lt;h3 id=&#34;yes-pain-no-gain&#34;&gt;Yes Pain, No gain&lt;/h3&gt;
+&lt;h3 id=&#34;yes-pain-no-gain&#34;&gt;Yes Pain, No Gain&lt;/h3&gt;
 
 &lt;p&gt;Keybindings were nightmare. I could never configured them in a right way. I couldn&amp;rsquo;t use slurp and barf shortcuts of &lt;a href=&#34;http://danmidwood.com/content/2014/11/21/animated-paredit.html&#34; target=&#34;_blank&#34;&gt;Paredit&lt;/a&gt;. Maybe this wasn&amp;rsquo;t so important, but I was obsessed.&lt;/p&gt;
 
 &lt;p&gt;Switching between windows wasn&amp;rsquo;t easy. I lost the REPL window many times. Any wrong command was ruining current setup heavily. I couldn&amp;rsquo;t figure out how to take back my faulty commands. I was hiding something forever or falling in a hopeless situation.&lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;m very used to see the project folder at the right side of the window. So, I searched for a package and found &lt;a href=&#34;https://github.com/jaypei/emacs-neotree&#34; target=&#34;_blank&#34;&gt;NeoTree&lt;/a&gt;. After many attempts of getting used to shortcuts, I was happy to see my files at the left sidebar, until opening a new project. NeoTree was working only for one frame, it was a &lt;strong&gt;single instance&lt;/strong&gt;. It wasn&amp;rsquo;t possible to work at more than one project at the same time.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m very used to see the project folder at the left side of the window. So, I searched for a package and found &lt;a href=&#34;https://github.com/jaypei/emacs-neotree&#34; target=&#34;_blank&#34;&gt;NeoTree&lt;/a&gt;. After many attempts of getting used to shortcuts, I was happy to see my files at the left sidebar, until opening a new project. NeoTree was working only for one frame, it was a &lt;strong&gt;single instance&lt;/strong&gt;. It wasn&amp;rsquo;t possible to work at more than one project at the same time.&lt;/p&gt;
 
 &lt;p&gt;All these experiments took several evenings and several weekends. I wasn&amp;rsquo;t learning Clojure, I was struggling with Emacs all the time, and I stopped.&lt;/p&gt;
 
