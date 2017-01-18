@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="personal website, blog, developer, software engineer">
+
+<base href="http://sercanulucan.com/">
+<title>
+
+
+     Four Ways of fib(n) with Clojure 
+
+</title>
+<link rel="canonical" href="http://sercanulucan.com/blog/2017/01/four-ways-of-fibn-with-clojure/">
+
+
+<script type="text/javascript">
+    var baseURL = 'http:\/\/sercanulucan.com\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+<link rel="stylesheet" href="http://sercanulucan.com/css/solarized-light.css">  
+
+<link rel="stylesheet" href="http://sercanulucan.com/css/reset.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/pygments.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/main.css"> 
+<link rel="stylesheet" href="http://sercanulucan.com/css/override.css">  
+
+
+<link rel="shortcut icon"  href="http://sercanulucan.com/img/favicon.ico" >
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            <a href="http://sercanulucan.com/"><div class="name">Sercan Ulucan</div></a>
+            <nav>
+                <ul>
+                    <a href="http://sercanulucan.com/blog/"><li>Blog</li></a>
+                    <a href="http://sercanulucan.com/clojure/"><li>Clojure</li></a>
+                    <a href="http://sercanulucan.com/misc/"><li>Misc.</li></a>
+                    <a href="http://sercanulucan.com/archive/"><li>Archive</li></a>
+                    <a href="http://sercanulucan.com/about/"><li>About</li></a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Four Ways of fib(n) with Clojure
+
+</div>
+
+                    <div class="initials"><a href="http://sercanulucan.com/">ad</a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Tue Jan 17 2017 00:00:00 MSK">Jan 17, 2017</div>
+                    <div class="reading-time"><div class="middot"></div>3 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>Calculation of nth <a href="https://en.wikipedia.org/wiki/Fibonacci_number" target="_blank">Fibonacci number</a> is one of the common example of introduction to programming. Here I wanted combine this example with some Clojure utilities in four ways.</p>
+
+<ol>
+<li>Recursive with stack usage and <code>memoize</code></li>
+<li>Recursive with tail call</li>
+<li>With <code>reduce</code> function</li>
+<li>Imperative way with <code>refs</code></li>
+</ol>
+
+<p><strong>fib(0) = 0<br />
+fib(1) = 1<br />
+fib(n) = fib(n-1) + fib(n-2)</strong></p>
+
+<h3 id="1-recursive-with-stack-usage-and-memoize">1. Recursive with stack usage and memoize</h3>
+
+<p>This example isn&rsquo;t the ideal way but it&rsquo;s important to understand how recursion works. Clojure has <strong>no tail recursion optimization by default</strong>. This example causes stack overflow error.
+<code>memoize</code> is a useful function to speed up when we&rsquo;re sure the result of the function is always same and there is no need to call once more for side effects.</p>
+
+<pre><code class="language-clojure">(defn fib [n]
+  (if (&gt; n 1)  ; if n=0 or n=1 return n
+    (+ (fib (dec n)) (fib (- n 2)))
+    n))
+
+(time (fib 36))
+;&quot;Elapsed time: 3234.847424 msecs&quot;
+;= 14930352
+
+(def fib-m
+  (memoize
+   (fn [n]
+     (if (&gt; n 1)
+       (+ (fib-m (dec n)) (fib-m (- n 2)))
+       n))))
+
+(time (fib-m 36))
+;&quot;Elapsed time: 0.480431 msecs&quot;
+;= 14930352
+
+(fib-m 10000)
+;StackOverflowError   clojure.lang.Numbers.gt (Numbers.java:3864)
+</code></pre>
+
+<h3 id="2-recursive-with-tail-call">2. Recursive with tail call</h3>
+
+<p>Clojure offers <code>recur</code> for tail recursions. It calls the nearest loop or the function itself.</p>
+
+<pre><code class="language-clojure">(defn fib-recursive [n]
+  (if (&gt; n 1)      ; if n=0 or n=1 return n
+    (loop [x 1 f0 0 f1 1]
+      (if (&lt; x n)  ; if it reaches to n, return f1
+        (recur (inc x) f1 (+ f0 f1))
+        f1))
+    n))
+
+(time (fib-recursive 36))
+;&quot;Elapsed time: 0.073619 msecs&quot;
+;= 14930352
+
+(time (fib-recursive 100))
+;ArithmeticException integer overflow  clojure.lang.Numbers.throwIntOverflow (Numbers.java:1501)
+</code></pre>
+
+<p>Oh we received an number overflow error. What is the problem? Clojure use <code>java.lang.Long</code> as the default precision type and we reached the maximum possible value. There are two options in this condition:</p>
+
+<ol>
+<li>Using <code>clojure.lang.BigInt</code> with <code>(bigint x)</code> or adding N to end of the number <code>123N</code>. This will be expensive if we usually stay in Long range.</li>
+<li>Using <code>+'</code> operator. It automatically uses <code>clojure.lang.BigInt</code> if necessary when the overflow occurs.</li>
+</ol>
+
+<p>Aritmetic operations have more best practices, it&rsquo;ll be too much to try handling all of them here.</p>
+
+<pre><code class="language-clojure">(+ 1 Long/MAX_VALUE)
+;ArithmeticException integer overflow  clojure.lang.Numbers.throwIntOverflow (Numbers.java:1501)
+
+(type (+' 1 Long/MAX_VALUE))
+;clojure.lang.BigInt
+
+(type (+ 1N Long/MAX_VALUE))
+;clojure.lang.BigInt
+
+(defn fib-recursive [n]
+  (if (&gt; n 1)      ; if n=0 or n=1 return n
+    (loop [x 1 f0 0 f1 1]
+      (if (&lt; x n)  ; if it reaches to n, return f1
+        (recur (inc x) f1 (+' f0 f1)) ; long to bingint if necessary
+        f1))
+    n))
+
+(fib-recursive 100000) ; pretty fast and no overflows
+;=2597....75N
+</code></pre>
+
+<h3 id="3-with-reduce-function">3. With <code>reduce</code> function</h3>
+
+<p>We just need to accumulate the numbers with the previous one. We can do it with reduce.</p>
+
+<pre><code class="language-clojure">(defn fib-reduce [n]
+  (if (&gt; n 1) ; if n=0 or n=1 return n
+    (first (reduce (fn [coll _]
+                     [(+' (first coll) (second coll)) ; save total and the previous
+                      (first coll)])                  ; in a vector
+                   [1 0] ; initial values
+                   (range 1 n)))
+    n))
+
+(fib-reduce 100000)
+;=2597....75N
+</code></pre>
+
+<h3 id="4-imperative-way-with-refs">4. Imperative way with <code>refs</code></h3>
+
+<p>Probably this is not the best code as an example but it gives an idea.</p>
+
+<pre><code class="language-clojure">(defn fib-imperative [n]
+  (let [x (atom n)
+        fib0 (ref 0)
+        fib1 (ref 1)
+        fibt (ref 1)]
+    (while (&gt; @x 1)
+      (do (dosync (ref-set fibt @fib1)
+                  (alter fib1 #(+' % @fib0))
+                  (ref-set fib0 @fibt))
+          (swap! x dec)))
+    @fib1))
+
+(fib-imperative 100000)
+;=2597....75N
+</code></pre>
+
+<p>A mini benchmark of these functions. <code>fib-imperative</code> looks really slow.</p>
+
+<pre><code class="language-clojure">(defn function-time [f x]
+  (let [starttime (System/nanoTime)]
+    (f x)
+    (/ (- (System/nanoTime) starttime) 1e9)))
+
+(map (fn [f]
+       (reduce + (for [x (range 30)]
+                   (function-time f 100000))))
+     [fib-recursive fib-reduce fib-swap])
+;(10.650267569 11.351116001000001 39.083980229000005)
+</code></pre>
+
+<p>In conclusion, fib-recursive seems the most nature and the fastest in four. Of course there are more ways like Binet Formula to calculate Fibonacci numbers, but here the goals was practicing Clojure.</p>
+
+                <br>
+                <p><a href="http://sercanulucan.com/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sercanu';
+    var disqus_identifier = 'http:\/\/sercanulucan.com\/blog\/2017\/01\/four-ways-of-fibn-with-clojure\/';
+    var disqus_title = 'Four Ways of fib(n) with Clojure';
+    var disqus_url = 'http:\/\/sercanulucan.com\/blog\/2017\/01\/four-ways-of-fibn-with-clojure\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("UA-90387873-1");
+    pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+
+  <script src="http://sercanulucan.com/js/highlight.pack.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+

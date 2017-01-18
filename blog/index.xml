@@ -6,8 +6,163 @@
     <description>Recent content in Blog-rss on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 16 Jan 2017 00:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Tue, 17 Jan 2017 00:00:00 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Four Ways of fib(n) with Clojure</title>
+      <link>http://sercanulucan.com/blog/2017/01/four-ways-of-fibn-with-clojure/</link>
+      <pubDate>Tue, 17 Jan 2017 00:00:00 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2017/01/four-ways-of-fibn-with-clojure/</guid>
+      <description>
+
+&lt;p&gt;Calculation of nth &lt;a href=&#34;https://en.wikipedia.org/wiki/Fibonacci_number&#34; target=&#34;_blank&#34;&gt;Fibonacci number&lt;/a&gt; is one of the common example of introduction to programming. Here I wanted combine this example with some Clojure utilities in four ways.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Recursive with stack usage and &lt;code&gt;memoize&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Recursive with tail call&lt;/li&gt;
+&lt;li&gt;With &lt;code&gt;reduce&lt;/code&gt; function&lt;/li&gt;
+&lt;li&gt;Imperative way with &lt;code&gt;refs&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;fib(0) = 0&lt;br /&gt;
+fib(1) = 1&lt;br /&gt;
+fib(n) = fib(n-1) + fib(n-2)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;1-recursive-with-stack-usage-and-memoize&#34;&gt;1. Recursive with stack usage and memoize&lt;/h3&gt;
+
+&lt;p&gt;This example isn&amp;rsquo;t the ideal way but it&amp;rsquo;s important to understand how recursion works. Clojure has &lt;strong&gt;no tail recursion optimization by default&lt;/strong&gt;. This example causes stack overflow error.
+&lt;code&gt;memoize&lt;/code&gt; is a useful function to speed up when we&amp;rsquo;re sure the result of the function is always same and there is no need to call once more for side effects.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn fib [n]
+  (if (&amp;gt; n 1)  ; if n=0 or n=1 return n
+    (+ (fib (dec n)) (fib (- n 2)))
+    n))
+
+(time (fib 36))
+;&amp;quot;Elapsed time: 3234.847424 msecs&amp;quot;
+;= 14930352
+
+(def fib-m
+  (memoize
+   (fn [n]
+     (if (&amp;gt; n 1)
+       (+ (fib-m (dec n)) (fib-m (- n 2)))
+       n))))
+
+(time (fib-m 36))
+;&amp;quot;Elapsed time: 0.480431 msecs&amp;quot;
+;= 14930352
+
+(fib-m 10000)
+;StackOverflowError   clojure.lang.Numbers.gt (Numbers.java:3864)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-recursive-with-tail-call&#34;&gt;2. Recursive with tail call&lt;/h3&gt;
+
+&lt;p&gt;Clojure offers &lt;code&gt;recur&lt;/code&gt; for tail recursions. It calls the nearest loop or the function itself.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn fib-recursive [n]
+  (if (&amp;gt; n 1)      ; if n=0 or n=1 return n
+    (loop [x 1 f0 0 f1 1]
+      (if (&amp;lt; x n)  ; if it reaches to n, return f1
+        (recur (inc x) f1 (+ f0 f1))
+        f1))
+    n))
+
+(time (fib-recursive 36))
+;&amp;quot;Elapsed time: 0.073619 msecs&amp;quot;
+;= 14930352
+
+(time (fib-recursive 100))
+;ArithmeticException integer overflow  clojure.lang.Numbers.throwIntOverflow (Numbers.java:1501)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Oh we received an number overflow error. What is the problem? Clojure use &lt;code&gt;java.lang.Long&lt;/code&gt; as the default precision type and we reached the maximum possible value. There are two options in this condition:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Using &lt;code&gt;clojure.lang.BigInt&lt;/code&gt; with &lt;code&gt;(bigint x)&lt;/code&gt; or adding N to end of the number &lt;code&gt;123N&lt;/code&gt;. This will be expensive if we usually stay in Long range.&lt;/li&gt;
+&lt;li&gt;Using &lt;code&gt;+&#39;&lt;/code&gt; operator. It automatically uses &lt;code&gt;clojure.lang.BigInt&lt;/code&gt; if necessary when the overflow occurs.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Aritmetic operations have more best practices, it&amp;rsquo;ll be too much to try handling all of them here.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(+ 1 Long/MAX_VALUE)
+;ArithmeticException integer overflow  clojure.lang.Numbers.throwIntOverflow (Numbers.java:1501)
+
+(type (+&#39; 1 Long/MAX_VALUE))
+;clojure.lang.BigInt
+
+(type (+ 1N Long/MAX_VALUE))
+;clojure.lang.BigInt
+
+(defn fib-recursive [n]
+  (if (&amp;gt; n 1)      ; if n=0 or n=1 return n
+    (loop [x 1 f0 0 f1 1]
+      (if (&amp;lt; x n)  ; if it reaches to n, return f1
+        (recur (inc x) f1 (+&#39; f0 f1)) ; long to bingint if necessary
+        f1))
+    n))
+
+(fib-recursive 100000) ; pretty fast and no overflows
+;=2597....75N
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-with-reduce-function&#34;&gt;3. With &lt;code&gt;reduce&lt;/code&gt; function&lt;/h3&gt;
+
+&lt;p&gt;We just need to accumulate the numbers with the previous one. We can do it with reduce.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn fib-reduce [n]
+  (if (&amp;gt; n 1) ; if n=0 or n=1 return n
+    (first (reduce (fn [coll _]
+                     [(+&#39; (first coll) (second coll)) ; save total and the previous
+                      (first coll)])                  ; in a vector
+                   [1 0] ; initial values
+                   (range 1 n)))
+    n))
+
+(fib-reduce 100000)
+;=2597....75N
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-imperative-way-with-refs&#34;&gt;4. Imperative way with &lt;code&gt;refs&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Probably this is not the best code as an example but it gives an idea.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn fib-imperative [n]
+  (let [x (atom n)
+        fib0 (ref 0)
+        fib1 (ref 1)
+        fibt (ref 1)]
+    (while (&amp;gt; @x 1)
+      (do (dosync (ref-set fibt @fib1)
+                  (alter fib1 #(+&#39; % @fib0))
+                  (ref-set fib0 @fibt))
+          (swap! x dec)))
+    @fib1))
+
+(fib-imperative 100000)
+;=2597....75N
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A mini benchmark of these functions. &lt;code&gt;fib-imperative&lt;/code&gt; looks really slow.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn function-time [f x]
+  (let [starttime (System/nanoTime)]
+    (f x)
+    (/ (- (System/nanoTime) starttime) 1e9)))
+
+(map (fn [f]
+       (reduce + (for [x (range 30)]
+                   (function-time f 100000))))
+     [fib-recursive fib-reduce fib-swap])
+;(10.650267569 11.351116001000001 39.083980229000005)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In conclusion, fib-recursive seems the most nature and the fastest in four. Of course there are more ways like Binet Formula to calculate Fibonacci numbers, but here the goals was practicing Clojure.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Emacs, One More Time</title>

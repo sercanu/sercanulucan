@@ -6,8 +6,163 @@
     <description>Recent content on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 16 Jan 2017 00:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Tue, 17 Jan 2017 00:00:00 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Four Ways of fib(n) with Clojure</title>
+      <link>http://sercanulucan.com/blog/2017/01/four-ways-of-fibn-with-clojure/</link>
+      <pubDate>Tue, 17 Jan 2017 00:00:00 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2017/01/four-ways-of-fibn-with-clojure/</guid>
+      <description>
+
+&lt;p&gt;Calculation of nth &lt;a href=&#34;https://en.wikipedia.org/wiki/Fibonacci_number&#34; target=&#34;_blank&#34;&gt;Fibonacci number&lt;/a&gt; is one of the common example of introduction to programming. Here I wanted combine this example with some Clojure utilities in four ways.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Recursive with stack usage and &lt;code&gt;memoize&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Recursive with tail call&lt;/li&gt;
+&lt;li&gt;With &lt;code&gt;reduce&lt;/code&gt; function&lt;/li&gt;
+&lt;li&gt;Imperative way with &lt;code&gt;refs&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;fib(0) = 0&lt;br /&gt;
+fib(1) = 1&lt;br /&gt;
+fib(n) = fib(n-1) + fib(n-2)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;1-recursive-with-stack-usage-and-memoize&#34;&gt;1. Recursive with stack usage and memoize&lt;/h3&gt;
+
+&lt;p&gt;This example isn&amp;rsquo;t the ideal way but it&amp;rsquo;s important to understand how recursion works. Clojure has &lt;strong&gt;no tail recursion optimization by default&lt;/strong&gt;. This example causes stack overflow error.
+&lt;code&gt;memoize&lt;/code&gt; is a useful function to speed up when we&amp;rsquo;re sure the result of the function is always same and there is no need to call once more for side effects.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn fib [n]
+  (if (&amp;gt; n 1)  ; if n=0 or n=1 return n
+    (+ (fib (dec n)) (fib (- n 2)))
+    n))
+
+(time (fib 36))
+;&amp;quot;Elapsed time: 3234.847424 msecs&amp;quot;
+;= 14930352
+
+(def fib-m
+  (memoize
+   (fn [n]
+     (if (&amp;gt; n 1)
+       (+ (fib-m (dec n)) (fib-m (- n 2)))
+       n))))
+
+(time (fib-m 36))
+;&amp;quot;Elapsed time: 0.480431 msecs&amp;quot;
+;= 14930352
+
+(fib-m 10000)
+;StackOverflowError   clojure.lang.Numbers.gt (Numbers.java:3864)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-recursive-with-tail-call&#34;&gt;2. Recursive with tail call&lt;/h3&gt;
+
+&lt;p&gt;Clojure offers &lt;code&gt;recur&lt;/code&gt; for tail recursions. It calls the nearest loop or the function itself.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn fib-recursive [n]
+  (if (&amp;gt; n 1)      ; if n=0 or n=1 return n
+    (loop [x 1 f0 0 f1 1]
+      (if (&amp;lt; x n)  ; if it reaches to n, return f1
+        (recur (inc x) f1 (+ f0 f1))
+        f1))
+    n))
+
+(time (fib-recursive 36))
+;&amp;quot;Elapsed time: 0.073619 msecs&amp;quot;
+;= 14930352
+
+(time (fib-recursive 100))
+;ArithmeticException integer overflow  clojure.lang.Numbers.throwIntOverflow (Numbers.java:1501)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Oh we received an number overflow error. What is the problem? Clojure use &lt;code&gt;java.lang.Long&lt;/code&gt; as the default precision type and we reached the maximum possible value. There are two options in this condition:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Using &lt;code&gt;clojure.lang.BigInt&lt;/code&gt; with &lt;code&gt;(bigint x)&lt;/code&gt; or adding N to end of the number &lt;code&gt;123N&lt;/code&gt;. This will be expensive if we usually stay in Long range.&lt;/li&gt;
+&lt;li&gt;Using &lt;code&gt;+&#39;&lt;/code&gt; operator. It automatically uses &lt;code&gt;clojure.lang.BigInt&lt;/code&gt; if necessary when the overflow occurs.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Aritmetic operations have more best practices, it&amp;rsquo;ll be too much to try handling all of them here.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(+ 1 Long/MAX_VALUE)
+;ArithmeticException integer overflow  clojure.lang.Numbers.throwIntOverflow (Numbers.java:1501)
+
+(type (+&#39; 1 Long/MAX_VALUE))
+;clojure.lang.BigInt
+
+(type (+ 1N Long/MAX_VALUE))
+;clojure.lang.BigInt
+
+(defn fib-recursive [n]
+  (if (&amp;gt; n 1)      ; if n=0 or n=1 return n
+    (loop [x 1 f0 0 f1 1]
+      (if (&amp;lt; x n)  ; if it reaches to n, return f1
+        (recur (inc x) f1 (+&#39; f0 f1)) ; long to bingint if necessary
+        f1))
+    n))
+
+(fib-recursive 100000) ; pretty fast and no overflows
+;=2597....75N
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-with-reduce-function&#34;&gt;3. With &lt;code&gt;reduce&lt;/code&gt; function&lt;/h3&gt;
+
+&lt;p&gt;We just need to accumulate the numbers with the previous one. We can do it with reduce.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn fib-reduce [n]
+  (if (&amp;gt; n 1) ; if n=0 or n=1 return n
+    (first (reduce (fn [coll _]
+                     [(+&#39; (first coll) (second coll)) ; save total and the previous
+                      (first coll)])                  ; in a vector
+                   [1 0] ; initial values
+                   (range 1 n)))
+    n))
+
+(fib-reduce 100000)
+;=2597....75N
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-imperative-way-with-refs&#34;&gt;4. Imperative way with &lt;code&gt;refs&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Probably this is not the best code as an example but it gives an idea.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn fib-imperative [n]
+  (let [x (atom n)
+        fib0 (ref 0)
+        fib1 (ref 1)
+        fibt (ref 1)]
+    (while (&amp;gt; @x 1)
+      (do (dosync (ref-set fibt @fib1)
+                  (alter fib1 #(+&#39; % @fib0))
+                  (ref-set fib0 @fibt))
+          (swap! x dec)))
+    @fib1))
+
+(fib-imperative 100000)
+;=2597....75N
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A mini benchmark of these functions. &lt;code&gt;fib-imperative&lt;/code&gt; looks really slow.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn function-time [f x]
+  (let [starttime (System/nanoTime)]
+    (f x)
+    (/ (- (System/nanoTime) starttime) 1e9)))
+
+(map (fn [f]
+       (reduce + (for [x (range 30)]
+                   (function-time f 100000))))
+     [fib-recursive fib-reduce fib-swap])
+;(10.650267569 11.351116001000001 39.083980229000005)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In conclusion, fib-recursive seems the most nature and the fastest in four. Of course there are more ways like Binet Formula to calculate Fibonacci numbers, but here the goals was practicing Clojure.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Emacs, One More Time</title>
@@ -503,7 +658,17 @@ meaning-of-life
       <pubDate>Mon, 31 Oct 2016 11:24:04 +0300</pubDate>
       
       <guid>http://sercanulucan.com/misc/learnings</guid>
-      <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 17&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 18&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;There are only two ways to live your life. One is as though nothing is a miracle. The other is as though everything is a miracle. &lt;cite&gt; Albert Einstein &lt;/cite&gt;&lt;/p&gt;
+
+&lt;p&gt;Good friends, good books, and a sleepy conscience: this is the ideal life. &lt;cite&gt; Mark Twain &lt;/cite&gt;&lt;/p&gt;
+
+&lt;p&gt;Life is what happens to us while we are making other plans. &lt;cite&gt;  Allen Saunders &lt;/cite&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 17&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Faith is a knowledge within the heart, beyond the reach of proof. &lt;cite&gt; Khalil Gibran &lt;/cite&gt;&lt;/p&gt;
@@ -969,312 +1134,6 @@ The example of a simple mail appeal for donations produces a response rate of ar
 
 &lt;p&gt;Friendship is a tree that can never recover when it is dried once. -&lt;cite&gt;Nazım Hikmet Ran&lt;/cite&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Vocabulary</title>
-      <link>http://sercanulucan.com/misc/vocabulary</link>
-      <pubDate>Mon, 31 Oct 2016 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/misc/vocabulary</guid>
-      <description>&lt;p&gt;&lt;strong&gt;Thanks to &lt;a href=&#34;http://dictionary.cambridge.org/&#34; target=&#34;_blank&#34;&gt;Cambridge dictionary&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 17&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;draining&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;causing you to lose most of your energy; very tiring&lt;br /&gt;
-&lt;em&gt;He found the funeral service emotionally draining.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;recuperate&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to become well again after an illness; to get back your strength, health, etc.&lt;br /&gt;
-&lt;em&gt;She spent a month in the country recuperating from/after the operation.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;ferocious&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;frightening and violent&lt;br /&gt;
-&lt;em&gt;She&amp;rsquo;s got a ferocious (= very bad) temper.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;The president came in for some ferocious criticism.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;abducted&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to force someone to go somewhere with you, often using threats or violence&lt;br /&gt;
-&lt;em&gt;The company director was abducted from his car by terrorists.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 16&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;perseverance&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;continued effort and determination&lt;br /&gt;
-&lt;em&gt;Through hard work and perseverance, he worked his way up to the top.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;ponder&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to think carefully about something, especially for a noticeable length of time&lt;br /&gt;
-&lt;em&gt;She sat back for a minute to ponder her next move in the game.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;fierce&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;physically violent and frightening / strong and powerful / showing strong feeling or energetic activity&lt;br /&gt;
-&lt;em&gt;Two men were shot during fierce fighting last weekend.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Fierce winds prevented the race from taking place.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;The expansion plans will face fierce opposition/resistance from environmentalists.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 15&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;oodles&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;a very large amount of something pleasant&lt;br /&gt;
-&lt;em&gt;She inherited oodles of money from her uncle.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;shatter&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to (cause something to) break suddenly into very small pieces / to end or severely damage something&lt;br /&gt;
-&lt;em&gt;The glass shattered into a thousand tiny pieces.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;The book shattered all her illusions about the Romans.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;atrophy&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;(of a part of the body) to be reduced in size and therefore strength, or, more generally, to become weaker&lt;br /&gt;
-&lt;em&gt;Over time, your muscles will atrophy, your physical state will weaken, and you’ll probably gain weight.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;In the 1980s, their political power gradually atrophied (= became weaker).&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 14&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;overlook&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to provide a view of, especially from above / to fail to notice or consider something or someone / to forgive or pretend not to notice something&lt;br /&gt;
-&lt;em&gt;Our hotel room overlooked the harbour.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;No one will be overlooked when we select players for the team.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;I&amp;rsquo;m prepared to overlook his behaviour this time.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;trait&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;a particular characteristic that can produce a particular type of behaviour&lt;br /&gt;
-&lt;em&gt;His sense of humour is one of his better traits.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Arrogance is a very unattractive personality/character trait.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;novelty&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;the quality of being new and unusual / something that has not been experienced before and so is interesting&lt;br /&gt;
-&lt;em&gt;The novelty of these toys soon wore off and the children became bored with them.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Tourists are still a novelty on this remote island.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 13&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;retardation&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;slow development, or development that is slower than it should be&lt;br /&gt;
-&lt;em&gt;Severe iron deficiency can cause developmental delay and growth retardation.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;mild&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;not violent, severe, or extreme&lt;br /&gt;
-&lt;em&gt;She can&amp;rsquo;t accept even mild criticism of her work.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Do you prefer mild or mature cheddar?&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;disorder&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;a state of untidiness or lack of organization&lt;br /&gt;
-&lt;em&gt;The whole office was in a state of disorder.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;The opposition party have been in such disorder for so long that they pose no real threat to the present government.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;impediment&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;something that makes progress, movement, or achieving something difficult or impossible&lt;br /&gt;
-&lt;em&gt;In a number of developing countries, war has been an additional impediment to progress.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;ignite&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to (cause to) start burning or explode / to cause a dangerous, excited, or angry situation to begin&lt;br /&gt;
-&lt;em&gt;The fuel spontaneously ignites because of the high temperature and pressure.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;The proposed restrictions have ignited a storm of protest.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;stimulus/stimuli (plural)&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;something that causes growth or activity&lt;br /&gt;
-&lt;em&gt;Foreign investment has been a stimulus to the industry.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;The book will provide a stimulus to research in this very important area.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 12&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;begrudge&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to feel unhappy because someone has something that you think they do not deserve / to feel unhappy about spending money on something or spending time doing something&lt;br /&gt;
-&lt;em&gt;I don&amp;rsquo;t begrudge him his freedom.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;They begrudged every day they had to stay with their father.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;She begrudged paying so much for an ice cream cone.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;poppy&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;a plant with large, delicate flowers that are typically red and have small, black seeds&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;ignite&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to (cause to) start burning or explode / to cause a dangerous, excited, or angry situation to begin&lt;br /&gt;
-&lt;em&gt;The fuel spontaneously ignites because of the high temperature and pressure.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;The proposed restrictions have ignited a storm of protest.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 11&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;spawn&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to cause something new, or many new things, to grow or start suddenly / the eggs of fish, frogs, etc.&lt;br /&gt;
-&lt;em&gt;The new economic freedom has spawned hundreds of new small businesses.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Her death spawned countless films and books.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;The frogs haven&amp;rsquo;t spawned yet.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;cranky&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;easily annoyed or upset / strange and unusual&lt;br /&gt;
-&lt;em&gt;He&amp;rsquo;s been cranky all day.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;She&amp;rsquo;s a member of a group that promotes cranky ideas about food and exercise.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;rut&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;a deep, narrow mark made in soft ground especially by a wheel / the period of the year during which particular male animals, especially deer and sheep, are sexually active&lt;br /&gt;
-&lt;em&gt;During the rut, stags can be seen fighting for females.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 10&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;sparse&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;small in numbers or amount, often spread over a large area.&lt;br /&gt;
-&lt;em&gt;Information coming out of the disaster area is sparse.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;relegate&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to put someone or something into a lower or less important rank or position&lt;br /&gt;
-&lt;em&gt;She resigned when she was relegated to a desk job.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;The story was relegated to the middle pages of the paper.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;revere&lt;/dt&gt;
-&lt;dd&gt;to very much respect and admire someone or something.&lt;br /&gt;
-&lt;em&gt;Nelson Mandela is revered for his brave fight against apartheid.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 9&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;laid-back&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;relaxed in manner and character; not usually worried about other people&amp;rsquo;s behaviour or things that need to be done&lt;br /&gt;
-&lt;em&gt;I&amp;rsquo;ve never seen her worried or anxious in any way - she&amp;rsquo;s so laid-back.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;bevy&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;a large group of people, especially women or girls, or a large group of similar things&lt;br /&gt;
-&lt;em&gt;Victorian postcards often featured bevies of bathing beauties.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;clairvoyance&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;a person who says they have powers to see the future or see things that other people cannot see&lt;br /&gt;
-&lt;em&gt;She went to see a clairvoyant who said he could communicate with her dead husband.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 8&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;succumb&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to lose the determination to oppose something; to accept defeat / to die or suffer badly from an illness&lt;br /&gt;
-&lt;em&gt;The town finally succumbed last week after being pounded with heavy artillery for more than two months.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;I&amp;rsquo;m afraid I succumbed to temptation and had a piece of cheesecake.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;I felt sure it would only be a matter of time before he succumbed to my charms.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Thousands of cows have succumbed to the disease in the past few months.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;splurge&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to spend a lot of money on buying goods, especially expensive goods&lt;br /&gt;
-&lt;em&gt;I feel like splurging (out) on a new dress.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;disguise&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to give a new appearance to a person or thing, especially in order to hide its true form&lt;br /&gt;
-&lt;em&gt;He disguised himself by wearing a false beard.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Minor skin imperfections can usually be disguised with a spot of make-up.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;I couldn&amp;rsquo;t disguise my disappointment.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 7&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;frugal&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;careful when using money or food, or (of a meal) cheap or small in amount&lt;br /&gt;
-&lt;em&gt;We had very little money, so we ate frugally in cheap cafés.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;I became more frugal with money and would only buy what I needed.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;remedy&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;a successful way of curing an illness or dealing with a problem or difficulty.&lt;br /&gt;
-&lt;em&gt;The best remedy for grief is hard work.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;You can buy most cold remedies over the counter.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;raving&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;complete or extreme, or completely or extremely.&lt;br /&gt;
-&lt;em&gt;He must be a raving idiot/lunatic.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;She&amp;rsquo;s no raving beauty.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 6&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;diligent&lt;/dt&gt;
-&lt;dd&gt;careful and using a lot of effort&lt;br /&gt;
-&lt;em&gt;Leo is very diligent in/about his work.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Cultivate a diligent approach towards ruthless prioritization&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Their lawyer was extremely diligent in preparing their case.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;detour&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;a different or less direct route to a place that is used to avoid a problem or to visit somewhere or do something on the way&lt;br /&gt;
-&lt;em&gt;You&amp;rsquo;d be wise to make (us also take) a detour to avoid the roadworks.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Traffic detours will be kept to a minimum throughout the festival.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;swamp&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;very wet, soft land&lt;br /&gt;
-&lt;em&gt;The Everglades are an area of swamp in southern Florida.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 5&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;loom&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to appear as a large, often frightening or unclear shape or object&lt;br /&gt;
-&lt;em&gt;Dark storm clouds loomed on the horizon.&lt;/em&gt;
-&lt;em&gt;Her final exams are looming.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Here, too, the threat of unemployment has been looming on the horizon.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;looming&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;(of something unwanted or unpleasant) about to happen soon and causing worry&lt;br /&gt;
-&lt;em&gt;There is the looming issue of job loss due to automation.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;gratitude&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;the feeling or quality of being grateful&lt;br /&gt;
-&lt;em&gt;She sent them a present to show/express her gratitude.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;drain&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;If you drain something, you remove the liquid from it, usually by pouring it away or allowing it to flow away, and if something drains, liquid flows away or out of it.&lt;br /&gt;
-&lt;em&gt;Drain the pasta thoroughly.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Don&amp;rsquo;t bother drying the pans - just leave them to drain.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 4&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;congruent&lt;/dt&gt;
-&lt;dd&gt;similar to or in agreement with something, so that the two things can both exist or can be combined without problems&lt;br /&gt;
-&lt;em&gt;Our goals are congruent; there is no conflict.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;We need the freedom to direct funds in a way that is congruent with local priorities.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;endurance&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;the ability to keep doing something difficult, unpleasant, or painful for a long time&lt;br /&gt;
-&lt;em&gt;Running a marathon is a test of human endurance.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;The pain was bad beyond endurance.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;flee&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to escape by running away, especially because of danger or fear&lt;br /&gt;
-&lt;em&gt;She fled (from) the room in tears.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;In order to escape capture, he fled to the mountains.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 3&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;grist for the mill&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;anything that can be used to your advantage&lt;br /&gt;
-&lt;em&gt;I might as well learn another language, it&amp;rsquo;s all grist to the mill when it comes to getting a job.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;The most mundane experiences are grist for the mill.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;arousal&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to cause someone to have a particular feeling&lt;br /&gt;
-&lt;em&gt;It&amp;rsquo;s a subject that has aroused a lot of interest.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Our suspicions were first aroused when we heard a muffled scream.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;dt&gt;oblivion&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;the state of being completely forgotten / the state of being completely destroyed&lt;br /&gt;
-&lt;em&gt;He was another minor poet who was consigned to oblivion.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;The planes bombed the city into oblivion.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 2&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;curator&lt;/dt&gt;
-&lt;dd&gt;a person in charge of a museum, library, etc.&lt;br /&gt;
-&lt;em&gt;She visited the various museums and private collections of this country, and got in touch with the heads of the different departments and their curators.&lt;/em&gt;&lt;/dd&gt;
-&lt;dt&gt;caveat&lt;/dt&gt;
-&lt;dd&gt;a warning to consider something before taking any more action, or a statement that limits a more general statement.&lt;br /&gt;
-&lt;em&gt;He agreed to the interview, with the caveat that he could approve the final article.&lt;/em&gt;&lt;/dd&gt;
-&lt;dt&gt;fierce&lt;/dt&gt;
-&lt;dd&gt;physically violent and frightening / strong and powerful / showing strong feeling or energetic activity&lt;br /&gt;
-&lt;em&gt;Two men were shot during fierce fighting last weekend.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;Fierce winds prevented the race from taking place.&lt;/em&gt;
-&lt;em&gt;The expansion plans will face fierce opposition/resistance from environmentalists.&lt;/em&gt;&lt;br /&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Jan 1&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;distort&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to change something from its usual, original, natural, or intended meaning, condition, or shape.
-&lt;em&gt;Another one is the misinformation effect, a memory bias in which we subconsciously incorporate new information to distort memory of the original event.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;My original statement has been completely distorted by the media.&lt;/em&gt;&lt;/dd&gt;
-&lt;dt&gt;impede&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;to make it more difficult for something to happen or more difficult for someone to do something.&lt;br /&gt;
-&lt;em&gt;Together, the cumulative implications of these biases impede our ability to form the accurate and complete picture needed for effective reflection.&lt;/em&gt;
-&lt;em&gt;Although he&amp;rsquo;s shy, it certainly hasn&amp;rsquo;t impeded his career in any way.&lt;/em&gt;&lt;/dd&gt;
-&lt;dt&gt;disposal&lt;br /&gt;&lt;/dt&gt;
-&lt;dd&gt;he act of getting rid of something, especially by throwing it away.&lt;br /&gt;
-&lt;em&gt;We are all investors; the currency at our disposal is time and energy.&lt;/em&gt;&lt;/dd&gt;
-&lt;/dl&gt;
 </description>
     </item>
     
