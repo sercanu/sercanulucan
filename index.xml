@@ -6,8 +6,131 @@
     <description>Recent content on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 17 Jan 2017 00:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Thu, 19 Jan 2017 00:00:00 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Fibonacci sequence with Clojure</title>
+      <link>http://sercanulucan.com/blog/2017/01/fibonacci-sequence-with-clojure/</link>
+      <pubDate>Thu, 19 Jan 2017 00:00:00 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2017/01/fibonacci-sequence-with-clojure/</guid>
+      <description>
+
+&lt;p&gt;Fib(n) is calculated at &lt;a href=&#34;http://sercanulucan.com/blog/2017/01/four-ways-of-fibn-with-clojure/&#34;&gt;this post&lt;/a&gt;. Another common example is generating the sequence. Here we do it in 4 ways:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Recursive way&lt;/li&gt;
+&lt;li&gt;With &lt;code&gt;iterate&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;With &lt;code&gt;lazy-cat&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;With &lt;code&gt;lazy-seq&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;&amp;ldquo;Out of memory&amp;rdquo; errors depend on the JVM settings and the physical memory. The fibonacci serie with 1,000,000 items cause error at my computer but 100,000 items don&amp;rsquo;t cause. Please change these factors according to your environment. It&amp;rsquo;s important to understand how lazy sequences work.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;fib(1) = 0&lt;br /&gt;
+fib(2) = 0 1&lt;br /&gt;
+fib(3) = 0 1 1&lt;br /&gt;
+fib(4) = 0 1 1 2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;1-recursive-way&#34;&gt;1. Recursive way&lt;/h3&gt;
+
+&lt;p&gt;The first solution coming to mind might be this one. Add the sum of last two numbers to the vector. &lt;code&gt;conj&lt;/code&gt;, &lt;code&gt;pop&lt;/code&gt;, &lt;code&gt;peek&lt;/code&gt; are the fastest ways to manipulate collections.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn fib-seq [n]
+ (if (&amp;gt; n 1) ; fib(1) is [0]
+   (loop [x (- n 2)
+          v [0 1]]
+     (if (&amp;gt; x 0)
+       (recur (dec x) (conj v (+ (peek v) (peek (pop v)))))
+       v))
+  [0]))
+
+(fib-seq 15)
+;=[0 1 1 2 3 5 8 13 21 34 55 89 144 233 377]
+
+(defn function-time-sec [f x]
+  (let [starttime (System/nanoTime)]
+    (f x)
+    (/ (- (System/nanoTime) starttime) 1e9)))
+
+(function-time-sec fib-seq 100000)
+;=0.497667624
+
+(function-time-sec fib-seq 1000000)
+;OutOfMemoryError Java heap space  java.math.BigInteger.add (BigInteger.java:1315)
+;This is okay because the vector and numbers are really big
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-with-iterate&#34;&gt;2. With iterate&lt;/h3&gt;
+
+&lt;p&gt;This is not the ideal solution because it generates temporary vectors but it&amp;rsquo;s a good example to show how lazy sequences work.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn fib-iterate [m]
+  (-&amp;gt;&amp;gt; (iterate (fn [[x y]] [y (+&#39; x y)]) [0 1])
+       (take m)
+       (map first)))
+
+(function-time-sec fib-iterate 100000)
+;=5.84E-6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;5.84E-6&lt;/code&gt; is very fast! This is impossible. The reason is &lt;code&gt;iterate&lt;/code&gt;, &lt;code&gt;take&lt;/code&gt; and &lt;code&gt;map&lt;/code&gt; returns lazy sequences. The sequence didn&amp;rsquo;t realize because our code didn&amp;rsquo;t attempt to access any item of it. Here we realize the sequence.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(let [starttime (System/nanoTime)]
+  (doall (fib-iterate 100000))
+  (/ (- (System/nanoTime) starttime) 1e9))
+;=0.516226539
+
+(let [starttime (System/nanoTime)]
+  (doall (fib-iterate 1000000))
+  (/ (- (System/nanoTime) starttime) 1e9))
+;OutOfMemoryError Java heap space
+;We can&#39;t realize all items in the list, same problem with the first example
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now it&amp;rsquo;s okay but there are more ways to generate lazy sequences as seen below. Also we have another problem here, what if we want to get the 1.000.000th element of the sequence? Will it cause a memory error too? No, because we use lazy sequence and the unused elements will be garbage collected.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(let [m (fib-iterate 1000000)]
+  (last m))
+;= 12071...
+
+(let [m (fib-iterate 1000000)]
+  (+ (first m) (last m)))
+;= 12071...
+
+(let [m (fib-iterate 1000000)]
+  (+ (last m) (first m)))
+;OutOfMemoryError Java heap space
+;; Head retention!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The last example causes &lt;a href=&#34;http://stackoverflow.com/questions/15994316/clojure-head-retention&#34; target=&#34;_blank&#34;&gt;head retention&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;3-with-lazy-cat&#34;&gt;3. With &lt;code&gt;lazy-cat&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;This example is from the book &lt;a href=&#34;http://shop.oreilly.com/product/9781119267270.do&#34; target=&#34;_blank&#34;&gt;Professional Clojure&lt;/a&gt;. It generates a lazy sequence with &lt;code&gt;lazy-cat&lt;/code&gt;. A very concise solution but it causes head retention too. It&amp;rsquo;s possible to improve it like the below example.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def fib-lazy-cat
+  (lazy-cat [0 1] (map +&#39; (rest fib-lazy-cat) fib-lazy-cat)))
+
+(last (take 1000000 fib-lazy-cat))
+;Exception in thread &amp;quot;nREPL-worker-1&amp;quot; java.lang.OutOfMemoryError: GC overhead limit exceeded
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-with-lazy-seq&#34;&gt;4. With &lt;code&gt;lazy-seq&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;This is from &lt;a href=&#34;https://clojuredocs.org/clojure.core/lazy-seq#example-542692d3c026201cdc326feb&#34; target=&#34;_blank&#34;&gt;ClojureDocs.org&lt;/a&gt;. It generates fib sequence without head retention. This is the ideal way of generating lazy sequences.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn fib-lazy-seq
+  ([] (fib 0 1))
+  ([a b] (lazy-seq (cons a (fib-lazy-seq b (+&#39; a b))))))
+
+(last (take 1000000 (fib-lazy-seq)))
+;= 12071...
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Four Ways of fib(n) with Clojure</title>
@@ -1108,42 +1231,6 @@ The example of a simple mail appeal for donations produces a response rate of ar
 &lt;a href=&#34;http://sercanulucan.com/misc/vocabulary/&#34;&gt;Vocabulary&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;http://sercanulucan.com/misc/links/&#34;&gt;Link Collections Before 2017&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;http://sercanulucan.com/misc/quotes/&#34;&gt;Favourite Quotes Before 2017&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Quotes</title>
-      <link>http://sercanulucan.com/misc/quotes</link>
-      <pubDate>Mon, 31 Oct 2016 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/misc/quotes</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;Progress, far from consisting in change, depends on retentiveness. -&lt;cite&gt;George Santayana&lt;/cite&gt;&lt;/p&gt;
-
-&lt;p&gt;Those who cannot remember the past are condemned to repeat it. -&lt;cite&gt;George Santayana&lt;/cite&gt;&lt;/p&gt;
-
-&lt;p&gt;The easiest person to deceive is one&amp;rsquo;s self. -&lt;cite&gt;Edward G. Bulwer-Lytton&lt;/cite&gt;&lt;/p&gt;
-
-&lt;p&gt;Nothing astonishes men so much as common sense and plain dealing. -&lt;cite&gt;Ralph Waldo Emerson&lt;/cite&gt;&lt;/p&gt;
-
-&lt;p&gt;There is a luxury in self-reproach. When we blame ourselves we feel no one else has a right to blame us. -&lt;cite&gt;Oscar Wilde&lt;/cite&gt;&lt;/p&gt;
-
-&lt;p&gt;Nothing is more dangerous than an idea if it&amp;rsquo;s the only one you have. -&lt;cite&gt;Émile Chartier&lt;/cite&gt;&lt;/p&gt;
-
-&lt;p&gt;The limits of my language mean the limits of my world. -&lt;cite&gt;Ludwig Wittgenstein&lt;/cite&gt;&lt;/p&gt;
-
-&lt;p&gt;The greatest of all weaknesses is the fear of appearing weak. -&lt;cite&gt;Jacques-Bénigne Bossuet&lt;/cite&gt;&lt;/p&gt;
-
-&lt;p&gt;Striving to better, oft we mar what&amp;rsquo;s well. -&lt;cite&gt;Shakespeare&lt;/cite&gt;&lt;/p&gt;
-
-&lt;p&gt;An investment in knowledge always pays the best interest. -&lt;cite&gt;Benjamin Franklin&lt;/cite&gt;&lt;/p&gt;
-
-&lt;p&gt;I believe that it is better to be looked over than it is to be overlooked. -&lt;cite&gt;Mae West&lt;/cite&gt;&lt;/p&gt;
-
-&lt;p&gt;The palest ink is better than the best memory. -&lt;cite&gt;Chinese Proverb&lt;/cite&gt;&lt;/p&gt;
-
-&lt;p&gt;Friendship is a tree that can never recover when it is dried once. -&lt;cite&gt;Nazım Hikmet Ran&lt;/cite&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
 </description>
     </item>
     

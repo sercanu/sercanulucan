@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="personal website, blog, developer, software engineer">
+
+<base href="http://sercanulucan.com/">
+<title>
+
+
+     Fibonacci sequence with Clojure 
+
+</title>
+<link rel="canonical" href="http://sercanulucan.com/blog/2017/01/fibonacci-sequence-with-clojure/">
+
+
+<script type="text/javascript">
+    var baseURL = 'http:\/\/sercanulucan.com\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+<link rel="stylesheet" href="http://sercanulucan.com/css/solarized-light.css">  
+
+<link rel="stylesheet" href="http://sercanulucan.com/css/reset.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/pygments.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/main.css"> 
+<link rel="stylesheet" href="http://sercanulucan.com/css/override.css">  
+
+
+<link rel="shortcut icon"  href="http://sercanulucan.com/img/favicon.ico" >
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            <a href="http://sercanulucan.com/"><div class="name">Sercan Ulucan</div></a>
+            <nav>
+                <ul>
+                    <a href="http://sercanulucan.com/blog/"><li>Blog</li></a>
+                    <a href="http://sercanulucan.com/clojure/"><li>Clojure</li></a>
+                    <a href="http://sercanulucan.com/misc/"><li>Misc.</li></a>
+                    <a href="http://sercanulucan.com/archive/"><li>Archive</li></a>
+                    <a href="http://sercanulucan.com/about/"><li>About</li></a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Fibonacci sequence with Clojure
+
+</div>
+
+                    <div class="initials"><a href="http://sercanulucan.com/">ad</a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Thu Jan 19 2017 00:00:00 MSK">Jan 19, 2017</div>
+                    <div class="reading-time"><div class="middot"></div>3 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>Fib(n) is calculated at <a href="http://sercanulucan.com/blog/2017/01/four-ways-of-fibn-with-clojure/">this post</a>. Another common example is generating the sequence. Here we do it in 4 ways:</p>
+
+<ol>
+<li>Recursive way</li>
+<li>With <code>iterate</code></li>
+<li>With <code>lazy-cat</code></li>
+<li>With <code>lazy-seq</code><br /></li>
+</ol>
+
+<p><strong>&ldquo;Out of memory&rdquo; errors depend on the JVM settings and the physical memory. The fibonacci serie with 1,000,000 items cause error at my computer but 100,000 items don&rsquo;t cause. Please change these factors according to your environment. It&rsquo;s important to understand how lazy sequences work.</strong></p>
+
+<p><strong>fib(1) = 0<br />
+fib(2) = 0 1<br />
+fib(3) = 0 1 1<br />
+fib(4) = 0 1 1 2</strong></p>
+
+<h3 id="1-recursive-way">1. Recursive way</h3>
+
+<p>The first solution coming to mind might be this one. Add the sum of last two numbers to the vector. <code>conj</code>, <code>pop</code>, <code>peek</code> are the fastest ways to manipulate collections.</p>
+
+<pre><code class="language-clojure">(defn fib-seq [n]
+ (if (&gt; n 1) ; fib(1) is [0]
+   (loop [x (- n 2)
+          v [0 1]]
+     (if (&gt; x 0)
+       (recur (dec x) (conj v (+ (peek v) (peek (pop v)))))
+       v))
+  [0]))
+
+(fib-seq 15)
+;=[0 1 1 2 3 5 8 13 21 34 55 89 144 233 377]
+
+(defn function-time-sec [f x]
+  (let [starttime (System/nanoTime)]
+    (f x)
+    (/ (- (System/nanoTime) starttime) 1e9)))
+
+(function-time-sec fib-seq 100000)
+;=0.497667624
+
+(function-time-sec fib-seq 1000000)
+;OutOfMemoryError Java heap space  java.math.BigInteger.add (BigInteger.java:1315)
+;This is okay because the vector and numbers are really big
+</code></pre>
+
+<h3 id="2-with-iterate">2. With iterate</h3>
+
+<p>This is not the ideal solution because it generates temporary vectors but it&rsquo;s a good example to show how lazy sequences work.</p>
+
+<pre><code class="language-clojure">(defn fib-iterate [m]
+  (-&gt;&gt; (iterate (fn [[x y]] [y (+' x y)]) [0 1])
+       (take m)
+       (map first)))
+
+(function-time-sec fib-iterate 100000)
+;=5.84E-6
+</code></pre>
+
+<p><code>5.84E-6</code> is very fast! This is impossible. The reason is <code>iterate</code>, <code>take</code> and <code>map</code> returns lazy sequences. The sequence didn&rsquo;t realize because our code didn&rsquo;t attempt to access any item of it. Here we realize the sequence.</p>
+
+<pre><code class="language-clojure">(let [starttime (System/nanoTime)]
+  (doall (fib-iterate 100000))
+  (/ (- (System/nanoTime) starttime) 1e9))
+;=0.516226539
+
+(let [starttime (System/nanoTime)]
+  (doall (fib-iterate 1000000))
+  (/ (- (System/nanoTime) starttime) 1e9))
+;OutOfMemoryError Java heap space
+;We can't realize all items in the list, same problem with the first example
+</code></pre>
+
+<p>Now it&rsquo;s okay but there are more ways to generate lazy sequences as seen below. Also we have another problem here, what if we want to get the 1.000.000th element of the sequence? Will it cause a memory error too? No, because we use lazy sequence and the unused elements will be garbage collected.</p>
+
+<pre><code class="language-clojure">(let [m (fib-iterate 1000000)]
+  (last m))
+;= 12071...
+
+(let [m (fib-iterate 1000000)]
+  (+ (first m) (last m)))
+;= 12071...
+
+(let [m (fib-iterate 1000000)]
+  (+ (last m) (first m)))
+;OutOfMemoryError Java heap space
+;; Head retention!
+</code></pre>
+
+<p>The last example causes <a href="http://stackoverflow.com/questions/15994316/clojure-head-retention" target="_blank">head retention</a>.</p>
+
+<h3 id="3-with-lazy-cat">3. With <code>lazy-cat</code></h3>
+
+<p>This example is from the book <a href="http://shop.oreilly.com/product/9781119267270.do" target="_blank">Professional Clojure</a>. It generates a lazy sequence with <code>lazy-cat</code>. A very concise solution but it causes head retention too. It&rsquo;s possible to improve it like the below example.</p>
+
+<pre><code class="language-clojure">(def fib-lazy-cat
+  (lazy-cat [0 1] (map +' (rest fib-lazy-cat) fib-lazy-cat)))
+
+(last (take 1000000 fib-lazy-cat))
+;Exception in thread &quot;nREPL-worker-1&quot; java.lang.OutOfMemoryError: GC overhead limit exceeded
+</code></pre>
+
+<h3 id="4-with-lazy-seq">4. With <code>lazy-seq</code></h3>
+
+<p>This is from <a href="https://clojuredocs.org/clojure.core/lazy-seq#example-542692d3c026201cdc326feb" target="_blank">ClojureDocs.org</a>. It generates fib sequence without head retention. This is the ideal way of generating lazy sequences.</p>
+
+<pre><code class="language-clojure">(defn fib-lazy-seq
+  ([] (fib 0 1))
+  ([a b] (lazy-seq (cons a (fib-lazy-seq b (+' a b))))))
+
+(last (take 1000000 (fib-lazy-seq)))
+;= 12071...
+</code></pre>
+
+                <br>
+                <p><a href="http://sercanulucan.com/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sercanu';
+    var disqus_identifier = 'http:\/\/sercanulucan.com\/blog\/2017\/01\/fibonacci-sequence-with-clojure\/';
+    var disqus_title = 'Fibonacci sequence with Clojure';
+    var disqus_url = 'http:\/\/sercanulucan.com\/blog\/2017\/01\/fibonacci-sequence-with-clojure\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("UA-90387873-1");
+    pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+
+  <script src="http://sercanulucan.com/js/highlight.pack.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+
