@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="personal website, blog, developer, software engineer">
+
+<base href="http://sercanulucan.com/">
+<title>
+
+
+     Polymorphism with Multimethods in Clojure 
+
+</title>
+<link rel="canonical" href="http://sercanulucan.com/blog/2017/01/polymorphism-with-multimethods-in-clojure/">
+
+
+<script type="text/javascript">
+    var baseURL = 'http:\/\/sercanulucan.com\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+<link rel="stylesheet" href="http://sercanulucan.com/css/solarized-light.css">  
+
+<link rel="stylesheet" href="http://sercanulucan.com/css/reset.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/pygments.css">
+<link rel="stylesheet" href="http://sercanulucan.com/css/main.css"> 
+<link rel="stylesheet" href="http://sercanulucan.com/css/override.css">  
+
+
+<link rel="shortcut icon"  href="http://sercanulucan.com/img/favicon.ico" >
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            <a href="http://sercanulucan.com/"><div class="name">Sercan Ulucan</div></a>
+            <nav>
+                <ul>
+                    <a href="http://sercanulucan.com/blog/"><li>Blog</li></a>
+                    <a href="http://sercanulucan.com/clojure/"><li>Clojure</li></a>
+                    <a href="http://sercanulucan.com/misc/"><li>Misc.</li></a>
+                    <a href="http://sercanulucan.com/archive/"><li>Archive</li></a>
+                    <a href="http://sercanulucan.com/about/"><li>About</li></a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Polymorphism with Multimethods in Clojure
+
+</div>
+
+                    <div class="initials"><a href="http://sercanulucan.com/">ad</a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Fri Jan 20 2017 00:00:00 MSK">Jan 20, 2017</div>
+                    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                <p>I love birds, especially chickens. They wander and look for food all the day. They eat pernicious bugs, leave precious droppings, and they lay eggs almost each day. Also there are more animals which lay eggs too. The number of the eggs and the weight of them depends on the specie. The methods below calculate the total weight according to parameters, season and sub-specie. All of them are just examples to understand multimethods in Clojure for sure.</p>
+
+<p>Namespaced keywords used to stay in this namespace.</p>
+
+<pre><code class="language-clojure">(defmulti lay-egg ::specie)
+
+(defmethod lay-egg ::chicken [m]
+  (* 200 50 (::season m) (::sub-specie-rate m 1)))
+
+(defmethod lay-egg ::quail [m]
+  (* 100 15 (::season m) (::age-rate m 1)))
+
+(defmethod lay-egg ::goose [m]
+  (* 50 150 (::season m) (::color-rate m 1)))
+
+(lay-egg {::specie ::chicken
+          ::season 1})
+;=10000
+(lay-egg {::specie ::goose
+          ::season 2})
+;=15000
+</code></pre>
+
+<p>What if we want to calculate for an another specie?</p>
+
+<pre><code class="language-clojure">(lay-egg {::specie ::budgerigar
+          ::season 1})
+;IllegalArgumentException No method in multimethod 'lay-egg' for dispatch value: :user/budgerigar  clojure.lang.MultiFn.getFn (MultiFn.java:156)
+</code></pre>
+
+<p>It&rsquo;s possible to define a default method to prevent this case. <code>:default</code> is a special keyword.</p>
+
+<pre><code class="language-clojure">(defmethod lay-egg :default [m]
+  (* 1 1 (::egg m 1)))
+
+(lay-egg {::specie ::budgerigar
+          ::season 1})
+;=1
+</code></pre>
+
+<p>If we want to use the same method for the sub-species, we need to derive from the root specie.</p>
+
+<pre><code class="language-clojure">(derive ::grand-chicken ::chicken)
+
+(lay-egg {::specie ::grand-chicken
+          ::sub-specie-rate 3
+          ::season 1})
+;=30000
+
+(derive ::white-chicken ::chicken)
+(isa? ::white-chicken ::chicken)
+;=true
+
+(derive ::white-grand-chicken ::grand-chicken)
+(derive ::white-grand-chicken ::white-chicken)
+(isa? ::white-grand-chicken ::chicken)
+;=true
+(lay-egg {::specie ::white-grand-chicken
+          ::sub-specie-rate 5
+          ::season 1})
+;=50000
+</code></pre>
+
+<p>Let&rsquo;s assume that duck is the product of a secret night between goose and chicken.</p>
+
+<pre><code class="language-clojure">(derive ::duck ::chicken)
+(derive ::duck ::goose)
+
+(lay-egg {::specie ::duck
+          ::season 1})
+;IllegalArgumentException Multiple methods in multimethod 'lay-egg' match dispatch value: :user/duck -&gt; :user/goose and :user/chicken, and neither is preferred  clojure.lang.MultiFn.findAndCacheBestMethod (MultiFn.java:178)
+</code></pre>
+
+<p>It&rsquo;s not possible to dispatch because there two suitable methods. One of them should be preferred.</p>
+
+<pre><code class="language-clojure">(prefer-method lay-egg ::goose ::chicken)
+
+(lay-egg {::specie ::duck
+          ::season 1})
+;=7500
+</code></pre>
+
+<p>The examples can be extended. It&rsquo;s possible to define hierarchies with <code>make-hierarchy</code> and modify them with <code>alter-var-root</code>. Also there more handy methods like <code>parents</code>, <code>descendants</code>, <code>ancestors</code> etc.</p>
+
+                <br>
+                <p><a href="http://sercanulucan.com/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sercanu';
+    var disqus_identifier = 'http:\/\/sercanulucan.com\/blog\/2017\/01\/polymorphism-with-multimethods-in-clojure\/';
+    var disqus_title = 'Polymorphism with Multimethods in Clojure';
+    var disqus_url = 'http:\/\/sercanulucan.com\/blog\/2017\/01\/polymorphism-with-multimethods-in-clojure\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("UA-90387873-1");
+    pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+
+  <script src="http://sercanulucan.com/js/highlight.pack.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+

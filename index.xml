@@ -6,8 +6,100 @@
     <description>Recent content on Sercan Ulucan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 19 Jan 2017 00:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Fri, 20 Jan 2017 00:00:00 +0300</lastBuildDate>
     <atom:link href="http://sercanulucan.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Polymorphism with Multimethods in Clojure</title>
+      <link>http://sercanulucan.com/blog/2017/01/polymorphism-with-multimethods-in-clojure/</link>
+      <pubDate>Fri, 20 Jan 2017 00:00:00 +0300</pubDate>
+      
+      <guid>http://sercanulucan.com/blog/2017/01/polymorphism-with-multimethods-in-clojure/</guid>
+      <description>&lt;p&gt;I love birds, especially chickens. They wander and look for food all the day. They eat pernicious bugs, leave precious droppings, and they lay eggs almost each day. Also there are more animals which lay eggs too. The number of the eggs and the weight of them depends on the specie. The methods below calculate the total weight according to parameters, season and sub-specie. All of them are just examples to understand multimethods in Clojure for sure.&lt;/p&gt;
+
+&lt;p&gt;Namespaced keywords used to stay in this namespace.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defmulti lay-egg ::specie)
+
+(defmethod lay-egg ::chicken [m]
+  (* 200 50 (::season m) (::sub-specie-rate m 1)))
+
+(defmethod lay-egg ::quail [m]
+  (* 100 15 (::season m) (::age-rate m 1)))
+
+(defmethod lay-egg ::goose [m]
+  (* 50 150 (::season m) (::color-rate m 1)))
+
+(lay-egg {::specie ::chicken
+          ::season 1})
+;=10000
+(lay-egg {::specie ::goose
+          ::season 2})
+;=15000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What if we want to calculate for an another specie?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(lay-egg {::specie ::budgerigar
+          ::season 1})
+;IllegalArgumentException No method in multimethod &#39;lay-egg&#39; for dispatch value: :user/budgerigar  clojure.lang.MultiFn.getFn (MultiFn.java:156)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s possible to define a default method to prevent this case. &lt;code&gt;:default&lt;/code&gt; is a special keyword.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defmethod lay-egg :default [m]
+  (* 1 1 (::egg m 1)))
+
+(lay-egg {::specie ::budgerigar
+          ::season 1})
+;=1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If we want to use the same method for the sub-species, we need to derive from the root specie.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(derive ::grand-chicken ::chicken)
+
+(lay-egg {::specie ::grand-chicken
+          ::sub-specie-rate 3
+          ::season 1})
+;=30000
+
+(derive ::white-chicken ::chicken)
+(isa? ::white-chicken ::chicken)
+;=true
+
+(derive ::white-grand-chicken ::grand-chicken)
+(derive ::white-grand-chicken ::white-chicken)
+(isa? ::white-grand-chicken ::chicken)
+;=true
+(lay-egg {::specie ::white-grand-chicken
+          ::sub-specie-rate 5
+          ::season 1})
+;=50000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s assume that duck is the product of a secret night between goose and chicken.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(derive ::duck ::chicken)
+(derive ::duck ::goose)
+
+(lay-egg {::specie ::duck
+          ::season 1})
+;IllegalArgumentException Multiple methods in multimethod &#39;lay-egg&#39; match dispatch value: :user/duck -&amp;gt; :user/goose and :user/chicken, and neither is preferred  clojure.lang.MultiFn.findAndCacheBestMethod (MultiFn.java:178)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s not possible to dispatch because there two suitable methods. One of them should be preferred.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(prefer-method lay-egg ::goose ::chicken)
+
+(lay-egg {::specie ::duck
+          ::season 1})
+;=7500
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The examples can be extended. It&amp;rsquo;s possible to define hierarchies with &lt;code&gt;make-hierarchy&lt;/code&gt; and modify them with &lt;code&gt;alter-var-root&lt;/code&gt;. Also there more handy methods like &lt;code&gt;parents&lt;/code&gt;, &lt;code&gt;descendants&lt;/code&gt;, &lt;code&gt;ancestors&lt;/code&gt; etc.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Fibonacci sequence with Clojure</title>
@@ -1227,21 +1319,6 @@ The example of a simple mail appeal for donations produces a response rate of ar
 &lt;a href=&#34;http://dailytekk.com/2014/02/19/the-top-50-subreddits/?reading=continue&#34; target=&#34;_blank&#34;&gt;the-top-50-subreddits&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;http://www.dailydot.com/news/reddit-top-200-subreddits-categorized/&#34; target=&#34;_blank&#34;&gt;reddit-top-200-subreddits-categorized&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;http://www.refinethemind.com/reddit-mind-44-smart-subreddits/&#34; target=&#34;_blank&#34;&gt;eddit-mind-44-smart-subreddits&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Misc</title>
-      <link>http://sercanulucan.com/misc</link>
-      <pubDate>Mon, 31 Oct 2016 11:24:04 +0300</pubDate>
-      
-      <guid>http://sercanulucan.com/misc</guid>
-      <description>&lt;p&gt;Here are some stuff aside from posts.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://sercanulucan.com/misc/learnings/&#34;&gt;Learnings&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://sercanulucan.com/misc/vocabulary/&#34;&gt;Vocabulary&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://sercanulucan.com/misc/links/&#34;&gt;Link Collections Before 2017&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://sercanulucan.com/misc/quotes/&#34;&gt;Favourite Quotes Before 2017&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
